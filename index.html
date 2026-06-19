@@ -781,6 +781,316 @@
     let lastNextId = null;
     const lastState = new Map();
     const resultFeed = new Map();
+    const EMBEDDED_VERIFIED_RESULTS = [
+      {
+            "id": "A01",
+            "status": "finished",
+            "score": {
+                  "a": 2,
+                  "b": 0
+            },
+            "source": "Verified result feed",
+            "note": "Mexico 2-0 South Africa",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "A02",
+            "status": "finished",
+            "score": {
+                  "a": 2,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Korea Republic 2-1 Czechia",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "B07",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Canada 1-1 Bosnia & Herzegovina",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "D19",
+            "status": "finished",
+            "score": {
+                  "a": 4,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "USA 4-1 Paraguay",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "D20",
+            "status": "finished",
+            "score": {
+                  "a": 2,
+                  "b": 0
+            },
+            "source": "Verified result feed",
+            "note": "Australia 2-0 Türkiye",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "B08",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Qatar 1-1 Switzerland",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "C13",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Brazil 1-1 Morocco",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "C14",
+            "status": "finished",
+            "score": {
+                  "a": 0,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Haiti 0-1 Scotland",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "E25",
+            "status": "finished",
+            "score": {
+                  "a": 7,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Germany 7-1 Curaçao",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "F31",
+            "status": "finished",
+            "score": {
+                  "a": 2,
+                  "b": 2
+            },
+            "source": "Verified result feed",
+            "note": "Netherlands 2-2 Japan",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "E26",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 0
+            },
+            "source": "Verified result feed",
+            "note": "Ivory Coast 1-0 Ecuador",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "F32",
+            "status": "finished",
+            "score": {
+                  "a": 5,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Sweden 5-1 Tunisia",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "H43",
+            "status": "finished",
+            "score": {
+                  "a": 0,
+                  "b": 0
+            },
+            "source": "Verified result feed",
+            "note": "Spain 0-0 Cape Verde",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "G37",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Belgium 1-1 Egypt",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "H44",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Saudi Arabia 1-1 Uruguay",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "G38",
+            "status": "finished",
+            "score": {
+                  "a": 2,
+                  "b": 2
+            },
+            "source": "Verified result feed",
+            "note": "Iran 2-2 New Zealand",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "I49",
+            "status": "finished",
+            "score": {
+                  "a": 3,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "France 3-1 Senegal",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "I50",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 4
+            },
+            "source": "Verified result feed",
+            "note": "Iraq 1-4 Norway",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "J55",
+            "status": "finished",
+            "score": {
+                  "a": 3,
+                  "b": 0
+            },
+            "source": "Verified result feed",
+            "note": "Argentina 3-0 Algeria",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "J56",
+            "status": "finished",
+            "score": {
+                  "a": 3,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Austria 3-1 Jordan",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "K61",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Portugal 1-1 DR Congo",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "L67",
+            "status": "finished",
+            "score": {
+                  "a": 4,
+                  "b": 2
+            },
+            "source": "Verified result feed",
+            "note": "England 4-2 Croatia",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "L68",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 0
+            },
+            "source": "Verified result feed",
+            "note": "Ghana 1-0 Panama",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "K62",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 3
+            },
+            "source": "Verified result feed",
+            "note": "Uzbekistan 1-3 Colombia",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "A03",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Czechia 1-1 South Africa",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "B09",
+            "status": "finished",
+            "score": {
+                  "a": 4,
+                  "b": 1
+            },
+            "source": "Verified result feed",
+            "note": "Switzerland 4-1 Bosnia & Herzegovina",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "B10",
+            "status": "finished",
+            "score": {
+                  "a": 6,
+                  "b": 0
+            },
+            "source": "Verified result feed",
+            "note": "Canada 6-0 Qatar",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      },
+      {
+            "id": "A04",
+            "status": "finished",
+            "score": {
+                  "a": 1,
+                  "b": 0
+            },
+            "source": "Verified result feed",
+            "note": "Mexico 1-0 Korea Republic",
+            "updatedAt": "2026-06-19T17:36:37Z"
+      }
+];
     let feedMeta = { loaded: false, updatedAt: null, source: 'Local fallback', error: null };
     const RESULT_FEED_URL = './worldcup-results.json';
     const RESULT_REFRESH_MS = 60 * 1000;
@@ -892,6 +1202,10 @@
     function applyResultData(data) {
       const items = Array.isArray(data?.results) ? data.results : [];
       const nextMap = new Map();
+      for (const item of EMBEDDED_VERIFIED_RESULTS) {
+        const normalized = normalizeResult(item);
+        if (normalized) nextMap.set(normalized.id, normalized);
+      }
       for (const item of items) {
         const normalized = normalizeResult(item);
         if (!normalized) continue;
@@ -915,6 +1229,8 @@
         const data = await response.json();
         applyResultData(data);
       } catch (error) {
+        // Keep the embedded verified baseline active if the external JSON is missing/stale.
+        if (!resultFeed.size) applyResultData({ results: [] });
         feedMeta.error = error?.message || 'Feed load failed';
         updateFeedStatus();
       }
@@ -1217,6 +1533,7 @@
       applyFilter();
     });
 
+    applyResultData({ results: [] });
     renderMatches();
     refreshNextBadges();
     for (const match of MATCHES) {
