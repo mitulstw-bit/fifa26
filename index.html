@@ -3,1550 +3,482 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FIFA World Cup 2026 Schedule | Bangladesh Time</title>
-  <meta name="description" content="FIFA World Cup 2026 group stage schedule in Bangladesh time with verified result feed, live states, filters, and premium dark UI." />
+  <title>FIFA World Cup 2026 — শেষ ৩২ ফিক্সচার ও লাইভ রোডম্যাপ</title>
+  <meta name="description" content="FIFA World Cup 2026 Round of 32 fixtures in Bangladesh time with a live, self-updating knockout roadmap that advances winners automatically from a verified result feed." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { bangla: ['Noto Sans Bengali', 'ui-sans-serif', 'system-ui'] },
-          boxShadow: {
-            glass: '0 20px 80px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08)'
-          }
-        }
-      }
-    };
+    tailwind.config = { theme: { extend: { fontFamily: { bangla: ['Noto Sans Bengali','ui-sans-serif','system-ui'] } } } };
   </script>
   <style>
     :root { color-scheme: dark; }
     * { -webkit-tap-highlight-color: transparent; }
-    body {
-      font-family: 'Noto Sans Bengali', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    body{
+      font-family:'Noto Sans Bengali',system-ui,-apple-system,Segoe UI,sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(14, 165, 233, .16), transparent 34rem),
-        radial-gradient(circle at 80% 12%, rgba(34, 197, 94, .10), transparent 32rem),
-        radial-gradient(circle at 55% 70%, rgba(239, 68, 68, .10), transparent 30rem),
+        radial-gradient(circle at top left, rgba(14,165,233,.16), transparent 34rem),
+        radial-gradient(circle at 80% 12%, rgba(34,197,94,.10), transparent 32rem),
+        radial-gradient(circle at 55% 75%, rgba(245,158,11,.10), transparent 30rem),
         #020617;
-      min-height: 100vh;
+      min-height:100vh;
     }
-    .glass {
-      background: linear-gradient(145deg, rgba(15, 23, 42, .78), rgba(2, 6, 23, .68));
-      border: 1px solid rgba(148, 163, 184, .18);
-      box-shadow: 0 20px 80px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
-      backdrop-filter: blur(18px);
-    }
-    .match-card {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(148, 163, 184, .16);
+    .glass{ background:linear-gradient(145deg,rgba(15,23,42,.78),rgba(2,6,23,.68)); border:1px solid rgba(148,163,184,.18); box-shadow:0 20px 80px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08); backdrop-filter:blur(18px); }
+    .scrollbar-none::-webkit-scrollbar{ display:none; }
+    .scrollbar-none{ -ms-overflow-style:none; scrollbar-width:none; }
+    .live-dot{ box-shadow:0 0 0 0 rgba(248,113,113,.7); animation:pulse 1.6s infinite; }
+    @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(248,113,113,.7)} 70%{box-shadow:0 0 0 10px rgba(248,113,113,0)} 100%{box-shadow:0 0 0 0 rgba(248,113,113,0)} }
+    .filter-btn.active{ background:linear-gradient(145deg,rgba(56,189,248,.22),rgba(14,165,233,.12)); border-color:rgba(125,211,252,.6); color:#e0f2fe; }
+    .win{ background:linear-gradient(90deg,rgba(34,197,94,.16),transparent); }
+    .out{ opacity:.45; }
+    .flag{ width:30px;height:20px;object-fit:cover;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.5); }
+    .roadmap-scroll{ overflow-x:auto; }
+    .champ-glow{ box-shadow:0 0 50px rgba(250,204,21,.35), inset 0 1px 0 rgba(255,255,255,.12); }
+
+    .section-kicker{ letter-spacing:.18em; text-transform:uppercase; }
+    .fixture-card{
+      position:relative;
+      overflow:hidden;
       background:
-        linear-gradient(145deg, rgba(15, 23, 42, .82), rgba(2, 6, 23, .92)),
-        radial-gradient(circle at top, rgba(148, 163, 184, .08), transparent 18rem);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, .28), inset 0 1px 0 rgba(255, 255, 255, .07), inset 0 -1px 0 rgba(255, 255, 255, .03);
-      transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease, opacity .2s ease;
-      will-change: transform;
-      isolation: isolate;
+        linear-gradient(145deg,rgba(15,23,42,.92),rgba(2,6,23,.78)),
+        radial-gradient(circle at 16% 0%,rgba(56,189,248,.18),transparent 18rem),
+        radial-gradient(circle at 84% 20%,rgba(250,204,21,.12),transparent 16rem);
+      border:1px solid rgba(148,163,184,.22);
+      box-shadow:0 28px 90px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.09);
+      transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
     }
-    .match-card::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      background: linear-gradient(120deg, transparent 5%, rgba(255,255,255,.10), transparent 42%);
-      opacity: .18;
-      pointer-events: none;
-      z-index: -1;
+    .fixture-card:hover{ transform:translateY(-3px); border-color:rgba(125,211,252,.48); box-shadow:0 34px 100px rgba(2,132,199,.16), 0 22px 80px rgba(0,0,0,.42); }
+    .fixture-card:before{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.045),transparent);
+      transform:translateX(-120%); transition:transform .7s ease;
     }
-    .match-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(226, 232, 240, .28);
-      box-shadow: 0 28px 70px rgba(0, 0, 0, .38), inset 0 1px 0 rgba(255,255,255,.10);
+    .fixture-card:hover:before{ transform:translateX(120%); }
+    .fixture-card .flag{ width:42px;height:28px;border-radius:6px; }
+    .time-highlight{
+      background:
+        linear-gradient(135deg,rgba(250,204,21,.20),rgba(14,165,233,.12) 52%,rgba(255,255,255,.04)),
+        radial-gradient(circle at top right,rgba(250,204,21,.20),transparent 16rem);
+      border:1px solid rgba(253,224,71,.42);
+      box-shadow:0 18px 55px rgba(250,204,21,.10), inset 0 1px 0 rgba(255,255,255,.12);
     }
-    .highlight-brazil {
-      border-color: rgba(250, 204, 21, .48);
-      background: radial-gradient(circle at 15% 0%, rgba(250, 204, 21, .18), transparent 12rem), radial-gradient(circle at 100% 20%, rgba(34, 197, 94, .16), transparent 12rem), linear-gradient(145deg, rgba(15, 23, 42, .83), rgba(2, 6, 23, .92));
-      box-shadow: 0 0 34px rgba(250, 204, 21, .13), inset 0 1px 0 rgba(255,255,255,.08);
+    .time-pill{ text-shadow:0 0 22px rgba(250,204,21,.45); }
+    .soft-grid{
+      background-image:linear-gradient(rgba(148,163,184,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.06) 1px,transparent 1px);
+      background-size:34px 34px;
     }
-    .highlight-argentina {
-      border-color: rgba(56, 189, 248, .52);
-      background: radial-gradient(circle at 14% 0%, rgba(56, 189, 248, .20), transparent 12rem), linear-gradient(145deg, rgba(15, 23, 42, .83), rgba(2, 6, 23, .92));
-      box-shadow: 0 0 34px rgba(56, 189, 248, .15), inset 0 1px 0 rgba(255,255,255,.08);
+    .order-badge{
+      background:linear-gradient(135deg,rgba(14,165,233,.24),rgba(250,204,21,.16));
+      border:1px solid rgba(125,211,252,.30);
     }
-    .highlight-portugal {
-      border-color: rgba(248, 113, 113, .55);
-      background: radial-gradient(circle at 14% 0%, rgba(248, 113, 113, .20), transparent 12rem), linear-gradient(145deg, rgba(15, 23, 42, .83), rgba(2, 6, 23, .92));
-      box-shadow: 0 0 34px rgba(239, 68, 68, .15), inset 0 1px 0 rgba(255,255,255,.08);
+
+    /* Compact fixture layout inspired by your reference screenshot */
+    .fixtures-shell{ padding:1.15rem; }
+    @media (min-width:640px){ .fixtures-shell{ padding:1.35rem; } }
+    .fixture-card{
+      border-radius:1.55rem;
+      padding:1rem;
+      min-height:326px;
+      background:
+        linear-gradient(145deg,rgba(15,23,42,.90),rgba(2,6,23,.78)),
+        radial-gradient(circle at 20% 5%,rgba(56,189,248,.10),transparent 14rem),
+        radial-gradient(circle at 88% 25%,rgba(250,204,21,.08),transparent 13rem);
+      border:1px solid rgba(148,163,184,.20);
+      box-shadow:0 16px 50px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.07);
     }
-    .highlight-france {
-      border-color: rgba(59, 130, 246, .56);
-      background: radial-gradient(circle at 14% 0%, rgba(37, 99, 235, .22), transparent 12rem), radial-gradient(circle at 100% 20%, rgba(239, 68, 68, .10), transparent 12rem), linear-gradient(145deg, rgba(15, 23, 42, .83), rgba(2, 6, 23, .92));
-      box-shadow: 0 0 34px rgba(59, 130, 246, .16), inset 0 1px 0 rgba(255,255,255,.08);
+    .fixture-card:hover{ transform:translateY(-2px); border-color:rgba(125,211,252,.36); box-shadow:0 22px 70px rgba(2,132,199,.12), 0 16px 50px rgba(0,0,0,.38); }
+    .fixture-card .flag{ width:54px;height:36px;border-radius:7px; }
+    .team-tile{
+      min-height:122px;
+      border:1px solid rgba(148,163,184,.15);
+      background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
     }
-    .highlight-germany {
-      border-color: rgba(251, 191, 36, .52);
-      background: radial-gradient(circle at 14% 0%, rgba(251, 191, 36, .18), transparent 12rem), radial-gradient(circle at 100% 20%, rgba(239, 68, 68, .12), transparent 12rem), linear-gradient(145deg, rgba(15, 23, 42, .83), rgba(2, 6, 23, .92));
-      box-shadow: 0 0 34px rgba(251, 191, 36, .14), inset 0 1px 0 rgba(255,255,255,.08);
+    .team-tile.winner{
+      border-color:rgba(250,204,21,.26);
+      background:
+        radial-gradient(circle at 50% 0%,rgba(250,204,21,.14),transparent 4.5rem),
+        linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
     }
-    .next-match {
-      border-color: rgba(34, 197, 94, .8) !important;
-      box-shadow: 0 0 0 1px rgba(34,197,94,.22), 0 0 42px rgba(34, 197, 94, .28), inset 0 1px 0 rgba(255,255,255,.10) !important;
+    .team-tile.loser{ opacity:.55; filter:saturate(.7); }
+    .score-capsule{
+      min-width:72px;
+      border:1px solid rgba(148,163,184,.18);
+      background:linear-gradient(180deg,rgba(15,23,42,.96),rgba(2,6,23,.84));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
     }
-    .live-match {
-      border-color: rgba(248, 113, 113, .9) !important;
-      box-shadow: 0 0 0 1px rgba(248,113,113,.22), 0 0 46px rgba(239, 68, 68, .34), inset 0 1px 0 rgba(255,255,255,.11) !important;
+    .compact-time{
+      border:1px solid rgba(253,224,71,.32);
+      background:linear-gradient(135deg,rgba(250,204,21,.15),rgba(14,165,233,.07));
+      box-shadow:0 8px 26px rgba(250,204,21,.07), inset 0 1px 0 rgba(255,255,255,.08);
     }
-    .team-win { color: rgb(110, 231, 183); text-shadow: 0 0 18px rgba(16, 185, 129, .32); }
-    .team-lose { opacity: .55; filter: grayscale(.75); }
-    .blink-red { animation: blinkRed 1s infinite; }
-    .pulse-green { animation: pulseGreen 1.6s ease-in-out infinite; }
-    .marquee-sheen { background-size: 220% 100%; animation: sheen 2.8s linear infinite; }
-    @keyframes blinkRed { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
-    @keyframes pulseGreen { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.04); opacity: .78; } }
-    @keyframes sheen { 0% { background-position: 220% 0; } 100% { background-position: -220% 0; } }
-    .scrollbar-none::-webkit-scrollbar { display: none; }
-    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+    .filter-btn{ height:38px; }
+
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-bangla selection:bg-emerald-400/30 selection:text-emerald-100">
-  <main class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-    <header class="pt-6 sm:pt-8">
-      <section class="glass relative overflow-hidden rounded-[2rem] px-5 py-7 sm:px-8 lg:px-10">
-        <div class="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-sky-500/20 blur-3xl"></div>
-        <div class="absolute -bottom-24 left-1/3 h-56 w-56 rounded-full bg-emerald-500/10 blur-3xl"></div>
-        <div class="relative grid gap-6 lg:grid-cols-[1.15fr_.85fr] lg:items-center">
-          <div>
-            <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-400/20 bg-sky-400/10 px-3 py-1 text-xs font-bold uppercase tracking-[.22em] text-sky-200">
-              <span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,.8)]"></span>
-              Bangladesh Time • UTC+6
-            </div>
-            <h1 class="text-3xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-              FIFA World Cup <span class="bg-gradient-to-r from-sky-300 via-white to-emerald-300 bg-clip-text text-transparent">2026</span>
-            </h1>
-            <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-300 sm:text-base">
-              গ্রুপ পর্বের সম্পূর্ণ সূচি বাংলাদেশ সময় অনুযায়ী। যাচাইকৃত JSON result feed, লাইভ স্টেট, পরবর্তী ম্যাচ, বিজয়ী হাইলাইট এবং প্রিমিয়াম ডার্ক UI সহ এক পেজে সব ম্যাচ।
-            </p>
-          </div>
-          <div class="grid grid-cols-3 gap-3 sm:grid-cols-3">
-            <div class="rounded-3xl border border-white/10 bg-white/[.045] p-4 text-center shadow-inner">
-              <p id="stat-total" class="text-2xl font-black text-white">72</p>
-              <p class="mt-1 text-xs font-semibold text-slate-400">ম্যাচ</p>
-            </div>
-            <div class="rounded-3xl border border-red-400/20 bg-red-400/[.06] p-4 text-center shadow-inner">
-              <p id="stat-live" class="text-2xl font-black text-red-200">0</p>
-              <p class="mt-1 text-xs font-semibold text-slate-400">লাইভ</p>
-            </div>
-            <div class="rounded-3xl border border-emerald-400/20 bg-emerald-400/[.06] p-4 text-center shadow-inner">
-              <p id="stat-upcoming" class="text-2xl font-black text-emerald-200">0</p>
-              <p class="mt-1 text-xs font-semibold text-slate-400">আসন্ন</p>
-            </div>
+<body class="text-slate-100">
+  <main class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+
+    <header class="glass rounded-3xl p-5 sm:p-7">
+      <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <p class="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-bold text-amber-200">
+            🏆 নকআউট পর্ব • রাউন্ড অফ ৩২
+          </p>
+          <h1 class="mt-3 text-2xl font-black leading-tight text-white sm:text-4xl">ফিফা বিশ্বকাপ ২০২৬</h1>
+          <p class="mt-1 text-base font-extrabold text-sky-200 sm:text-xl">শেষ ৩২ — পূর্ণ ফিক্সচার ও লাইভ রোডম্যাপ</p>
+          <p class="mt-2 max-w-xl text-sm text-slate-400">সব সময় বাংলাদেশ সময় (Asia/Dhaka • BDT) অনুযায়ী। ফল আসার সাথে সাথে রোডম্যাপ নিজে থেকে আপডেট হয় — জয়ী দল পরের রাউন্ডে উঠে যায়।</p>
+          <div class="mt-3 text-xs font-semibold text-slate-300">
+            <span class="text-slate-500">Timezone:</span> Asia/Dhaka • BDT
+            <span class="mx-2 text-slate-600">•</span>
+            <span id="data-source-status" class="text-slate-400">ফল ফিড লোড হচ্ছে…</span>
           </div>
         </div>
-      </section>
+        <div class="grid w-full max-w-md grid-cols-2 gap-3 sm:grid-cols-4 lg:w-auto">
+          <div class="rounded-3xl border border-white/10 bg-white/[.045] p-4 text-center shadow-inner">
+            <p id="stat-total" class="text-2xl font-black text-white">১৬</p>
+            <p class="mt-1 text-xs font-semibold text-slate-400">ম্যাচ</p>
+          </div>
+          <div class="rounded-3xl border border-red-400/20 bg-red-400/[.06] p-4 text-center shadow-inner">
+            <p id="stat-live" class="text-2xl font-black text-red-200">০</p>
+            <p class="mt-1 text-xs font-semibold text-slate-400">লাইভ</p>
+          </div>
+          <div class="rounded-3xl border border-emerald-400/20 bg-emerald-400/[.06] p-4 text-center shadow-inner">
+            <p id="stat-upcoming" class="text-2xl font-black text-emerald-200">০</p>
+            <p class="mt-1 text-xs font-semibold text-slate-400">আসন্ন</p>
+          </div>
+          <div class="rounded-3xl border border-sky-400/20 bg-sky-400/[.06] p-4 text-center shadow-inner">
+            <p id="stat-finished" class="text-2xl font-black text-sky-200">০</p>
+            <p class="mt-1 text-xs font-semibold text-slate-400">সম্পন্ন</p>
+          </div>
+        </div>
+      </div>
     </header>
 
-    <nav class="sticky top-0 z-40 -mx-4 mt-5 border-y border-white/10 bg-slate-950/68 px-4 py-3 backdrop-blur-xl sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-      <div class="mx-auto flex max-w-7xl items-center gap-3 overflow-x-auto scrollbar-none">
-        <button data-filter="all" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-sky-300/50 hover:bg-sky-300/10">All Matches</button>
-        <button data-filter="live" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-red-300/50 hover:bg-red-300/10">
-          <span class="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-red-500 shadow-[0_0_18px_rgba(239,68,68,.9)] blink-red"></span>Live
-        </button>
-        <button data-filter="next" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-emerald-300/50 hover:bg-emerald-300/10">
-          <span class="mr-2 inline-block h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,.75)]"></span>Next Match
-        </button>
-        <button data-filter="Brazil" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-yellow-300/50 hover:bg-yellow-300/10">Brazil</button>
-        <button data-filter="Argentina" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-sky-300/50 hover:bg-sky-300/10">Argentina</button>
-        <button data-filter="Portugal" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-red-300/50 hover:bg-red-300/10">Portugal</button>
-        <button data-filter="France" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-blue-300/50 hover:bg-blue-300/10">France</button>
-        <button data-filter="Germany" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-yellow-300/50 hover:bg-yellow-300/10">Germany</button>
-        <div class="ml-auto hidden shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/[.04] px-3 py-2 text-xs font-bold text-slate-300 sm:flex">
-          <span class="h-2 w-2 rounded-full bg-sky-300"></span>
-          <span id="active-filter-label">All Matches</span>
+    <!-- FIXTURES FIRST -->
+    <section class="fixtures-shell mt-5 glass soft-grid rounded-3xl">
+      <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="section-kicker text-xs font-black text-amber-200">Step 01 • Fixtures first</p>
+          <h2 class="mt-1 text-2xl font-black leading-tight text-white sm:text-3xl">📅 শেষ ৩২ ফিক্সচার</h2>
+          <p class="mt-2 max-w-2xl text-sm text-slate-400 sm:text-base">কার্ডগুলো কমপ্যাক্ট করা হয়েছে — আপনার দেওয়া রেফারেন্সের মতো ৪ কলাম ভিউ, পরিষ্কার স্কোর, ভেন্যু ও হাইলাইটেড সময়।</p>
+        </div>
+        <div class="order-badge rounded-3xl px-4 py-3 text-sm font-extrabold text-sky-100 shadow-lg">
+          প্রথমে ফিক্সচার • তারপর রোডম্যাপ • শেষে ম্যাপ
         </div>
       </div>
-    </nav>
 
-    <section class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-      <div>
-        <h2 class="text-xl font-black text-white sm:text-2xl">ম্যাচ কার্ড</h2>
-        <p class="mt-1 text-sm text-slate-400">কার্ডগুলো সময় অনুযায়ী সাজানো। স্কোর ও লাইভ টাইমার প্রতি সেকেন্ডে সফট DOM আপডেট হয়।</p>
+      <nav class="mt-5 rounded-3xl border border-white/10 bg-slate-950/48 p-2 backdrop-blur-xl">
+        <div class="flex items-center gap-2 overflow-x-auto scrollbar-none">
+          <button data-filter="all" class="filter-btn active shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-sky-300/50 hover:bg-sky-300/10">সব ম্যাচ</button>
+          <button data-filter="live" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-red-300/50 hover:bg-red-300/10">লাইভ</button>
+          <button data-filter="next" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-emerald-300/50 hover:bg-emerald-300/10">আসন্ন</button>
+          <button data-filter="finished" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-sky-300/50 hover:bg-sky-300/10">সম্পন্ন</button>
+        </div>
+      </nav>
+
+      <section id="matchesGrid" class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></section>
+    </section>
+
+    <!-- LIVE ROADMAP -->
+    <section class="mt-6 glass rounded-3xl p-5 sm:p-7">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p class="section-kicker text-xs font-black text-sky-200">Step 02 • Live bracket</p>
+          <h2 class="mt-2 text-2xl font-black text-white sm:text-3xl">🗺️ লাইভ রোডম্যাপ — শেষ ৩২ → ফাইনাল</h2>
+          <p class="mt-1 max-w-2xl text-sm text-slate-400">ফল ফিডে কোনো দল জিতলে/হারলে এই ব্র্যাকেট স্বয়ংক্রিয়ভাবে আপডেট হয়। জয়ী দল পরের রাউন্ডে উঠে যাবে।</p>
+        </div>
+        <span class="inline-flex items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1.5 text-xs font-bold text-emerald-200">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 live-dot"></span> অটো-আপডেট চালু
+        </span>
       </div>
-      <div class="rounded-2xl border border-white/10 bg-white/[.035] px-4 py-3 text-xs font-semibold text-slate-300">
-        <span class="text-slate-500">Timezone:</span> Asia/Dhaka • BDT
-        <span class="mx-2 text-slate-600">•</span>
-        <span id="data-source-status" class="text-slate-400">Loading result feed…</span>
+
+      <div id="champBanner" class="mt-4 hidden rounded-3xl border border-amber-300/40 bg-amber-300/[.08] p-5 text-center champ-glow"></div>
+
+      <div class="roadmap-scroll mt-5 -mx-1 px-1">
+        <div id="bracket" class="flex min-w-max items-stretch gap-3"></div>
       </div>
     </section>
 
-    <section id="matchesGrid" class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4"></section>
+    <!-- ROADMAP MAP -->
+    <section class="mt-6 glass rounded-3xl p-5 sm:p-7">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p class="section-kicker text-xs font-black text-amber-200">Step 03 • Fixture map</p>
+          <h2 class="mt-2 text-2xl font-black text-white sm:text-3xl">📍 রোডম্যাপ ফিক্সচার ম্যাপ</h2>
+          <p class="mt-1 text-sm text-slate-400">এক নজরে পুরো নকআউট পথ — শেষ ৩২ থেকে ফাইনাল পর্যন্ত।</p>
+        </div>
+        <a id="mapDownload" href="roadmap-fixture-map.png" download
+           class="rounded-full border border-sky-300/40 bg-sky-300/10 px-4 py-2 text-sm font-black text-sky-100 transition hover:bg-sky-300/20">⬇️ ইমেজ ডাউনলোড</a>
+      </div>
+      <div class="mt-5 rounded-[2rem] border border-white/10 bg-white/[.035] p-2 shadow-2xl">
+        <img src="roadmap-fixture-map.png" alt="Round of 32 fixture roadmap map"
+             class="w-full max-w-full rounded-[1.5rem] border border-white/10" loading="lazy" />
+      </div>
+      <p class="mt-3 text-xs font-semibold text-slate-500">ফাইনাল: ১৯ জুলাই ২০২৬ • MetLife Stadium, New York/New Jersey</p>
+    </section>
+
+    <footer class="mt-8 pb-6 text-center text-xs text-slate-500">
+      ডেটা সোর্স: <code>worldcup-results.json</code> • প্রতি ৬০ সেকেন্ডে রিফ্রেশ • অনুমান-নির্ভর স্কোর নয়, কেবল যাচাইকৃত ফল।
+    </footer>
   </main>
 
-  <template id="crownTemplate">
-    <svg viewBox="0 0 64 64" aria-hidden="true" class="mx-auto h-5 w-5 drop-shadow-[0_0_10px_rgba(250,204,21,.65)]">
-      <path fill="#facc15" d="M8 49h48l3-30-15 12L32 10 20 31 5 19l3 30Z"/>
-      <path fill="#fde68a" d="M13 44h38l1.3-13.2-10.6 8.5L32 22 22.3 39.3l-10.6-8.5L13 44Z" opacity=".9"/>
-      <path fill="#a16207" d="M10 49h44v6H10z"/>
-    </svg>
-  </template>
-
   <script>
-    const MATCHES = [
-  {
-    "id": "A01",
-    "group": "A",
-    "utc": "2026-06-11T19:00:00Z",
-    "team1": "Mexico",
-    "team2": "South Africa",
-    "city": "Mexico City"
-  },
-  {
-    "id": "A02",
-    "group": "A",
-    "utc": "2026-06-12T02:00:00Z",
-    "team1": "Korea Republic",
-    "team2": "Czechia",
-    "city": "Guadalajara"
-  },
-  {
-    "id": "B07",
-    "group": "B",
-    "utc": "2026-06-12T19:00:00Z",
-    "team1": "Canada",
-    "team2": "Bosnia & Herzegovina",
-    "city": "Toronto"
-  },
-  {
-    "id": "D19",
-    "group": "D",
-    "utc": "2026-06-13T01:00:00Z",
-    "team1": "USA",
-    "team2": "Paraguay",
-    "city": "Los Angeles"
-  },
-  {
-    "id": "D20",
-    "group": "D",
-    "utc": "2026-06-13T04:00:00Z",
-    "team1": "Australia",
-    "team2": "Türkiye",
-    "city": "Vancouver"
-  },
-  {
-    "id": "B08",
-    "group": "B",
-    "utc": "2026-06-13T19:00:00Z",
-    "team1": "Qatar",
-    "team2": "Switzerland",
-    "city": "San Francisco Bay Area"
-  },
-  {
-    "id": "C13",
-    "group": "C",
-    "utc": "2026-06-13T22:00:00Z",
-    "team1": "Brazil",
-    "team2": "Morocco",
-    "city": "New York/New Jersey"
-  },
-  {
-    "id": "C14",
-    "group": "C",
-    "utc": "2026-06-14T01:00:00Z",
-    "team1": "Haiti",
-    "team2": "Scotland",
-    "city": "Boston"
-  },
-  {
-    "id": "E25",
-    "group": "E",
-    "utc": "2026-06-14T17:00:00Z",
-    "team1": "Germany",
-    "team2": "Curaçao",
-    "city": "Houston"
-  },
-  {
-    "id": "F31",
-    "group": "F",
-    "utc": "2026-06-14T20:00:00Z",
-    "team1": "Netherlands",
-    "team2": "Japan",
-    "city": "Dallas"
-  },
-  {
-    "id": "E26",
-    "group": "E",
-    "utc": "2026-06-14T23:00:00Z",
-    "team1": "Ivory Coast",
-    "team2": "Ecuador",
-    "city": "Philadelphia"
-  },
-  {
-    "id": "F32",
-    "group": "F",
-    "utc": "2026-06-15T02:00:00Z",
-    "team1": "Sweden",
-    "team2": "Tunisia",
-    "city": "Monterrey"
-  },
-  {
-    "id": "H43",
-    "group": "H",
-    "utc": "2026-06-15T16:00:00Z",
-    "team1": "Spain",
-    "team2": "Cape Verde",
-    "city": "Atlanta"
-  },
-  {
-    "id": "G37",
-    "group": "G",
-    "utc": "2026-06-15T19:00:00Z",
-    "team1": "Belgium",
-    "team2": "Egypt",
-    "city": "Seattle"
-  },
-  {
-    "id": "H44",
-    "group": "H",
-    "utc": "2026-06-15T22:00:00Z",
-    "team1": "Saudi Arabia",
-    "team2": "Uruguay",
-    "city": "Miami"
-  },
-  {
-    "id": "G38",
-    "group": "G",
-    "utc": "2026-06-16T01:00:00Z",
-    "team1": "Iran",
-    "team2": "New Zealand",
-    "city": "Los Angeles"
-  },
-  {
-    "id": "J56",
-    "group": "J",
-    "utc": "2026-06-16T04:00:00Z",
-    "team1": "Austria",
-    "team2": "Jordan",
-    "city": "San Francisco Bay Area"
-  },
-  {
-    "id": "I49",
-    "group": "I",
-    "utc": "2026-06-16T19:00:00Z",
-    "team1": "France",
-    "team2": "Senegal",
-    "city": "New York/New Jersey"
-  },
-  {
-    "id": "I50",
-    "group": "I",
-    "utc": "2026-06-16T22:00:00Z",
-    "team1": "Iraq",
-    "team2": "Norway",
-    "city": "Boston"
-  },
-  {
-    "id": "J55",
-    "group": "J",
-    "utc": "2026-06-17T01:00:00Z",
-    "team1": "Argentina",
-    "team2": "Algeria",
-    "city": "Kansas City"
-  },
-  {
-    "id": "K61",
-    "group": "K",
-    "utc": "2026-06-17T17:00:00Z",
-    "team1": "Portugal",
-    "team2": "DR Congo",
-    "city": "Houston"
-  },
-  {
-    "id": "L67",
-    "group": "L",
-    "utc": "2026-06-17T20:00:00Z",
-    "team1": "England",
-    "team2": "Croatia",
-    "city": "Dallas"
-  },
-  {
-    "id": "L68",
-    "group": "L",
-    "utc": "2026-06-17T23:00:00Z",
-    "team1": "Ghana",
-    "team2": "Panama",
-    "city": "Toronto"
-  },
-  {
-    "id": "K62",
-    "group": "K",
-    "utc": "2026-06-18T02:00:00Z",
-    "team1": "Uzbekistan",
-    "team2": "Colombia",
-    "city": "Mexico City"
-  },
-  {
-    "id": "A03",
-    "group": "A",
-    "utc": "2026-06-18T16:00:00Z",
-    "team1": "Czechia",
-    "team2": "South Africa",
-    "city": "Atlanta"
-  },
-  {
-    "id": "B09",
-    "group": "B",
-    "utc": "2026-06-18T19:00:00Z",
-    "team1": "Switzerland",
-    "team2": "Bosnia & Herzegovina",
-    "city": "Los Angeles"
-  },
-  {
-    "id": "B10",
-    "group": "B",
-    "utc": "2026-06-18T22:00:00Z",
-    "team1": "Canada",
-    "team2": "Qatar",
-    "city": "Vancouver"
-  },
-  {
-    "id": "A04",
-    "group": "A",
-    "utc": "2026-06-19T01:00:00Z",
-    "team1": "Mexico",
-    "team2": "Korea Republic",
-    "city": "Guadalajara"
-  },
-  {
-    "id": "D22",
-    "group": "D",
-    "utc": "2026-06-19T04:00:00Z",
-    "team1": "Türkiye",
-    "team2": "Paraguay",
-    "city": "San Francisco Bay Area"
-  },
-  {
-    "id": "D21",
-    "group": "D",
-    "utc": "2026-06-19T19:00:00Z",
-    "team1": "USA",
-    "team2": "Australia",
-    "city": "Seattle"
-  },
-  {
-    "id": "C15",
-    "group": "C",
-    "utc": "2026-06-19T22:00:00Z",
-    "team1": "Scotland",
-    "team2": "Morocco",
-    "city": "Boston"
-  },
-  {
-    "id": "C16",
-    "group": "C",
-    "utc": "2026-06-20T01:00:00Z",
-    "team1": "Brazil",
-    "team2": "Haiti",
-    "city": "Philadelphia"
-  },
-  {
-    "id": "F34",
-    "group": "F",
-    "utc": "2026-06-20T04:00:00Z",
-    "team1": "Tunisia",
-    "team2": "Japan",
-    "city": "Monterrey"
-  },
-  {
-    "id": "F33",
-    "group": "F",
-    "utc": "2026-06-20T17:00:00Z",
-    "team1": "Netherlands",
-    "team2": "Sweden",
-    "city": "Houston"
-  },
-  {
-    "id": "E27",
-    "group": "E",
-    "utc": "2026-06-20T20:00:00Z",
-    "team1": "Germany",
-    "team2": "Ivory Coast",
-    "city": "Toronto"
-  },
-  {
-    "id": "E28",
-    "group": "E",
-    "utc": "2026-06-21T00:00:00Z",
-    "team1": "Ecuador",
-    "team2": "Curaçao",
-    "city": "Kansas City"
-  },
-  {
-    "id": "H45",
-    "group": "H",
-    "utc": "2026-06-21T16:00:00Z",
-    "team1": "Spain",
-    "team2": "Saudi Arabia",
-    "city": "Atlanta"
-  },
-  {
-    "id": "G39",
-    "group": "G",
-    "utc": "2026-06-21T19:00:00Z",
-    "team1": "Belgium",
-    "team2": "Iran",
-    "city": "Los Angeles"
-  },
-  {
-    "id": "H46",
-    "group": "H",
-    "utc": "2026-06-21T22:00:00Z",
-    "team1": "Uruguay",
-    "team2": "Cape Verde",
-    "city": "Miami"
-  },
-  {
-    "id": "G40",
-    "group": "G",
-    "utc": "2026-06-22T01:00:00Z",
-    "team1": "New Zealand",
-    "team2": "Egypt",
-    "city": "Vancouver"
-  },
-  {
-    "id": "J57",
-    "group": "J",
-    "utc": "2026-06-22T17:00:00Z",
-    "team1": "Argentina",
-    "team2": "Austria",
-    "city": "Dallas"
-  },
-  {
-    "id": "I51",
-    "group": "I",
-    "utc": "2026-06-22T21:00:00Z",
-    "team1": "France",
-    "team2": "Iraq",
-    "city": "Philadelphia"
-  },
-  {
-    "id": "I52",
-    "group": "I",
-    "utc": "2026-06-23T00:00:00Z",
-    "team1": "Norway",
-    "team2": "Senegal",
-    "city": "New York/New Jersey"
-  },
-  {
-    "id": "J58",
-    "group": "J",
-    "utc": "2026-06-23T03:00:00Z",
-    "team1": "Jordan",
-    "team2": "Algeria",
-    "city": "San Francisco Bay Area"
-  },
-  {
-    "id": "K63",
-    "group": "K",
-    "utc": "2026-06-23T17:00:00Z",
-    "team1": "Portugal",
-    "team2": "Uzbekistan",
-    "city": "Houston"
-  },
-  {
-    "id": "L69",
-    "group": "L",
-    "utc": "2026-06-23T20:00:00Z",
-    "team1": "England",
-    "team2": "Ghana",
-    "city": "Boston"
-  },
-  {
-    "id": "L70",
-    "group": "L",
-    "utc": "2026-06-23T23:00:00Z",
-    "team1": "Panama",
-    "team2": "Croatia",
-    "city": "Toronto"
-  },
-  {
-    "id": "K64",
-    "group": "K",
-    "utc": "2026-06-24T02:00:00Z",
-    "team1": "Colombia",
-    "team2": "DR Congo",
-    "city": "Guadalajara"
-  },
-  {
-    "id": "B11",
-    "group": "B",
-    "utc": "2026-06-24T19:00:00Z",
-    "team1": "Switzerland",
-    "team2": "Canada",
-    "city": "Vancouver"
-  },
-  {
-    "id": "B12",
-    "group": "B",
-    "utc": "2026-06-24T19:00:00Z",
-    "team1": "Bosnia & Herzegovina",
-    "team2": "Qatar",
-    "city": "Seattle"
-  },
-  {
-    "id": "C17",
-    "group": "C",
-    "utc": "2026-06-24T22:00:00Z",
-    "team1": "Scotland",
-    "team2": "Brazil",
-    "city": "Miami"
-  },
-  {
-    "id": "C18",
-    "group": "C",
-    "utc": "2026-06-24T22:00:00Z",
-    "team1": "Morocco",
-    "team2": "Haiti",
-    "city": "Atlanta"
-  },
-  {
-    "id": "A05",
-    "group": "A",
-    "utc": "2026-06-25T01:00:00Z",
-    "team1": "Czechia",
-    "team2": "Mexico",
-    "city": "Mexico City"
-  },
-  {
-    "id": "A06",
-    "group": "A",
-    "utc": "2026-06-25T01:00:00Z",
-    "team1": "South Africa",
-    "team2": "Korea Republic",
-    "city": "Monterrey"
-  },
-  {
-    "id": "E29",
-    "group": "E",
-    "utc": "2026-06-25T20:00:00Z",
-    "team1": "Ecuador",
-    "team2": "Germany",
-    "city": "New York/New Jersey"
-  },
-  {
-    "id": "E30",
-    "group": "E",
-    "utc": "2026-06-25T20:00:00Z",
-    "team1": "Curaçao",
-    "team2": "Ivory Coast",
-    "city": "Philadelphia"
-  },
-  {
-    "id": "F35",
-    "group": "F",
-    "utc": "2026-06-25T23:00:00Z",
-    "team1": "Japan",
-    "team2": "Sweden",
-    "city": "Dallas"
-  },
-  {
-    "id": "F36",
-    "group": "F",
-    "utc": "2026-06-25T23:00:00Z",
-    "team1": "Tunisia",
-    "team2": "Netherlands",
-    "city": "Kansas City"
-  },
-  {
-    "id": "D23",
-    "group": "D",
-    "utc": "2026-06-26T02:00:00Z",
-    "team1": "Türkiye",
-    "team2": "USA",
-    "city": "Los Angeles"
-  },
-  {
-    "id": "D24",
-    "group": "D",
-    "utc": "2026-06-26T02:00:00Z",
-    "team1": "Paraguay",
-    "team2": "Australia",
-    "city": "San Francisco Bay Area"
-  },
-  {
-    "id": "I53",
-    "group": "I",
-    "utc": "2026-06-26T19:00:00Z",
-    "team1": "Norway",
-    "team2": "France",
-    "city": "Boston"
-  },
-  {
-    "id": "I54",
-    "group": "I",
-    "utc": "2026-06-26T19:00:00Z",
-    "team1": "Senegal",
-    "team2": "Iraq",
-    "city": "Toronto"
-  },
-  {
-    "id": "H47",
-    "group": "H",
-    "utc": "2026-06-27T00:00:00Z",
-    "team1": "Cape Verde",
-    "team2": "Saudi Arabia",
-    "city": "Houston"
-  },
-  {
-    "id": "H48",
-    "group": "H",
-    "utc": "2026-06-27T00:00:00Z",
-    "team1": "Uruguay",
-    "team2": "Spain",
-    "city": "Guadalajara"
-  },
-  {
-    "id": "G41",
-    "group": "G",
-    "utc": "2026-06-27T03:00:00Z",
-    "team1": "Egypt",
-    "team2": "Iran",
-    "city": "Seattle"
-  },
-  {
-    "id": "G42",
-    "group": "G",
-    "utc": "2026-06-27T03:00:00Z",
-    "team1": "New Zealand",
-    "team2": "Belgium",
-    "city": "Vancouver"
-  },
-  {
-    "id": "L71",
-    "group": "L",
-    "utc": "2026-06-27T21:00:00Z",
-    "team1": "Panama",
-    "team2": "England",
-    "city": "New York/New Jersey"
-  },
-  {
-    "id": "L72",
-    "group": "L",
-    "utc": "2026-06-27T21:00:00Z",
-    "team1": "Croatia",
-    "team2": "Ghana",
-    "city": "Philadelphia"
-  },
-  {
-    "id": "K65",
-    "group": "K",
-    "utc": "2026-06-27T23:30:00Z",
-    "team1": "Colombia",
-    "team2": "Portugal",
-    "city": "Miami"
-  },
-  {
-    "id": "K66",
-    "group": "K",
-    "utc": "2026-06-27T23:30:00Z",
-    "team1": "DR Congo",
-    "team2": "Uzbekistan",
-    "city": "Atlanta"
-  },
-  {
-    "id": "J59",
-    "group": "J",
-    "utc": "2026-06-28T02:00:00Z",
-    "team1": "Algeria",
-    "team2": "Austria",
-    "city": "Kansas City"
-  },
-  {
-    "id": "J60",
-    "group": "J",
-    "utc": "2026-06-28T02:00:00Z",
-    "team1": "Jordan",
-    "team2": "Argentina",
-    "city": "Dallas"
-  }
-];
-    const MATCH_DURATION_SECONDS = 110 * 60;
-    // Demo mode is OFF by default so real date/time logic is respected.
-    // To preview the old forced live demo, open: index.html?demo=canada-live
-    const OVERRIDE_ID = 'B07';
-    const FORCE_CANADA_LIVE_DEMO = new URLSearchParams(window.location.search).get('demo') === 'canada-live';
-    const overrideBaseSeconds = (31 * 60) + 33;
-    const pageLoadedAt = Date.now();
-    let currentFilter = 'all';
-    let lastNextId = null;
-    const lastState = new Map();
-    const resultFeed = new Map();
-    const EMBEDDED_VERIFIED_RESULTS = [
-      {
-            "id": "A01",
-            "status": "finished",
-            "score": {
-                  "a": 2,
-                  "b": 0
-            },
-            "source": "Verified result feed",
-            "note": "Mexico 2-0 South Africa",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "A02",
-            "status": "finished",
-            "score": {
-                  "a": 2,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Korea Republic 2-1 Czechia",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "B07",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Canada 1-1 Bosnia & Herzegovina",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "D19",
-            "status": "finished",
-            "score": {
-                  "a": 4,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "USA 4-1 Paraguay",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "D20",
-            "status": "finished",
-            "score": {
-                  "a": 2,
-                  "b": 0
-            },
-            "source": "Verified result feed",
-            "note": "Australia 2-0 Türkiye",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "B08",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Qatar 1-1 Switzerland",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "C13",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Brazil 1-1 Morocco",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "C14",
-            "status": "finished",
-            "score": {
-                  "a": 0,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Haiti 0-1 Scotland",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "E25",
-            "status": "finished",
-            "score": {
-                  "a": 7,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Germany 7-1 Curaçao",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "F31",
-            "status": "finished",
-            "score": {
-                  "a": 2,
-                  "b": 2
-            },
-            "source": "Verified result feed",
-            "note": "Netherlands 2-2 Japan",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "E26",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 0
-            },
-            "source": "Verified result feed",
-            "note": "Ivory Coast 1-0 Ecuador",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "F32",
-            "status": "finished",
-            "score": {
-                  "a": 5,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Sweden 5-1 Tunisia",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "H43",
-            "status": "finished",
-            "score": {
-                  "a": 0,
-                  "b": 0
-            },
-            "source": "Verified result feed",
-            "note": "Spain 0-0 Cape Verde",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "G37",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Belgium 1-1 Egypt",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "H44",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Saudi Arabia 1-1 Uruguay",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "G38",
-            "status": "finished",
-            "score": {
-                  "a": 2,
-                  "b": 2
-            },
-            "source": "Verified result feed",
-            "note": "Iran 2-2 New Zealand",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "I49",
-            "status": "finished",
-            "score": {
-                  "a": 3,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "France 3-1 Senegal",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "I50",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 4
-            },
-            "source": "Verified result feed",
-            "note": "Iraq 1-4 Norway",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "J55",
-            "status": "finished",
-            "score": {
-                  "a": 3,
-                  "b": 0
-            },
-            "source": "Verified result feed",
-            "note": "Argentina 3-0 Algeria",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "J56",
-            "status": "finished",
-            "score": {
-                  "a": 3,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Austria 3-1 Jordan",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "K61",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Portugal 1-1 DR Congo",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "L67",
-            "status": "finished",
-            "score": {
-                  "a": 4,
-                  "b": 2
-            },
-            "source": "Verified result feed",
-            "note": "England 4-2 Croatia",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "L68",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 0
-            },
-            "source": "Verified result feed",
-            "note": "Ghana 1-0 Panama",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "K62",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 3
-            },
-            "source": "Verified result feed",
-            "note": "Uzbekistan 1-3 Colombia",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "A03",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Czechia 1-1 South Africa",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "B09",
-            "status": "finished",
-            "score": {
-                  "a": 4,
-                  "b": 1
-            },
-            "source": "Verified result feed",
-            "note": "Switzerland 4-1 Bosnia & Herzegovina",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "B10",
-            "status": "finished",
-            "score": {
-                  "a": 6,
-                  "b": 0
-            },
-            "source": "Verified result feed",
-            "note": "Canada 6-0 Qatar",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      },
-      {
-            "id": "A04",
-            "status": "finished",
-            "score": {
-                  "a": 1,
-                  "b": 0
-            },
-            "source": "Verified result feed",
-            "note": "Mexico 1-0 Korea Republic",
-            "updatedAt": "2026-06-19T17:36:37Z"
-      }
-];
-    let feedMeta = { loaded: false, updatedAt: null, source: 'Local fallback', error: null };
+    
+    const R32 = [{"id": "M73", "a": "South Africa", "b": "Canada", "utc": "2026-06-28T19:00:00Z", "city": "Los Angeles", "stadium": "SoFi Stadium"}, {"id": "M76", "a": "Brazil", "b": "Japan", "utc": "2026-06-29T17:00:00Z", "city": "Houston", "stadium": "NRG Stadium"}, {"id": "M74", "a": "Germany", "b": "Paraguay", "utc": "2026-06-29T20:30:00Z", "city": "Boston", "stadium": "Gillette Stadium"}, {"id": "M75", "a": "Netherlands", "b": "Morocco", "utc": "2026-06-30T01:00:00Z", "city": "Monterrey", "stadium": "Estadio BBVA"}, {"id": "M78", "a": "Ivory Coast", "b": "Norway", "utc": "2026-06-30T17:00:00Z", "city": "Dallas", "stadium": "AT&T Stadium"}, {"id": "M77", "a": "France", "b": "Sweden", "utc": "2026-06-30T21:00:00Z", "city": "New York/New Jersey", "stadium": "MetLife Stadium"}, {"id": "M79", "a": "Mexico", "b": "Ecuador", "utc": "2026-07-01T01:00:00Z", "city": "Mexico City", "stadium": "Estadio Azteca"}, {"id": "M80", "a": "England", "b": "DR Congo", "utc": "2026-07-01T16:00:00Z", "city": "Atlanta", "stadium": "Mercedes-Benz Stadium"}, {"id": "M82", "a": "Belgium", "b": "Senegal", "utc": "2026-07-01T20:00:00Z", "city": "Seattle", "stadium": "Lumen Field"}, {"id": "M81", "a": "USA", "b": "Bosnia & Herzegovina", "utc": "2026-07-02T00:00:00Z", "city": "San Francisco Bay Area", "stadium": "Levi's Stadium"}, {"id": "M84", "a": "Spain", "b": "Austria", "utc": "2026-07-02T19:00:00Z", "city": "Los Angeles", "stadium": "SoFi Stadium"}, {"id": "M83", "a": "Portugal", "b": "Croatia", "utc": "2026-07-02T23:00:00Z", "city": "Toronto", "stadium": "BMO Field"}, {"id": "M85", "a": "Switzerland", "b": "Algeria", "utc": "2026-07-03T03:00:00Z", "city": "Vancouver", "stadium": "BC Place"}, {"id": "M88", "a": "Australia", "b": "Egypt", "utc": "2026-07-03T18:00:00Z", "city": "Dallas", "stadium": "AT&T Stadium"}, {"id": "M86", "a": "Argentina", "b": "Cape Verde", "utc": "2026-07-03T22:00:00Z", "city": "Miami", "stadium": "Hard Rock Stadium"}, {"id": "M87", "a": "Colombia", "b": "Ghana", "utc": "2026-07-04T01:30:00Z", "city": "Kansas City", "stadium": "Arrowhead Stadium"}];
+    const BRACKET = {"r16": [{"id": "R16-1", "from": ["M74", "M77"]}, {"id": "R16-2", "from": ["M73", "M75"]}, {"id": "R16-3", "from": ["M83", "M84"]}, {"id": "R16-4", "from": ["M81", "M82"]}, {"id": "R16-5", "from": ["M76", "M78"]}, {"id": "R16-6", "from": ["M79", "M80"]}, {"id": "R16-7", "from": ["M86", "M88"]}, {"id": "R16-8", "from": ["M85", "M87"]}], "qf": [{"id": "QF-1", "from": ["R16-1", "R16-2"]}, {"id": "QF-2", "from": ["R16-3", "R16-4"]}, {"id": "QF-3", "from": ["R16-5", "R16-6"]}, {"id": "QF-4", "from": ["R16-7", "R16-8"]}], "sf": [{"id": "SF-1", "from": ["QF-1", "QF-2"]}, {"id": "SF-2", "from": ["QF-3", "QF-4"]}], "final": {"id": "F-1", "from": ["SF-1", "SF-2"]}};
+    const flagCodes = {"South Africa": "za", "Canada": "ca", "Brazil": "br", "Japan": "jp", "Germany": "de", "Paraguay": "py", "Netherlands": "nl", "Morocco": "ma", "Ivory Coast": "ci", "Norway": "no", "France": "fr", "Sweden": "se", "Mexico": "mx", "Ecuador": "ec", "England": "gb-eng", "DR Congo": "cd", "Belgium": "be", "Senegal": "sn", "USA": "us", "Bosnia & Herzegovina": "ba", "Spain": "es", "Austria": "at", "Portugal": "pt", "Croatia": "hr", "Switzerland": "ch", "Algeria": "dz", "Australia": "au", "Egypt": "eg", "Argentina": "ar", "Cape Verde": "cv", "Colombia": "co", "Ghana": "gh"};
+    const countryBn = {"South Africa": "দক্ষিণ আফ্রিকা", "Canada": "কানাডা", "Brazil": "ব্রাজিল", "Japan": "জাপান", "Germany": "জার্মানি", "Paraguay": "প্যারাগুয়ে", "Netherlands": "নেদারল্যান্ডস", "Morocco": "মরক্কো", "Ivory Coast": "আইভরি কোস্ট", "Norway": "নরওয়ে", "France": "ফ্রান্স", "Sweden": "সুইডেন", "Mexico": "মেক্সিকো", "Ecuador": "ইকুয়েডর", "England": "ইংল্যান্ড", "DR Congo": "ডিআর কঙ্গো", "Belgium": "বেলজিয়াম", "Senegal": "সেনেগাল", "USA": "যুক্তরাষ্ট্র", "Bosnia & Herzegovina": "বসনিয়া ও হার্জেগোভিনা", "Spain": "স্পেন", "Austria": "অস্ট্রিয়া", "Portugal": "পর্তুগাল", "Croatia": "ক্রোয়েশিয়া", "Switzerland": "সুইজারল্যান্ড", "Algeria": "আলজেরিয়া", "Australia": "অস্ট্রেলিয়া", "Egypt": "মিশর", "Argentina": "আর্জেন্টিনা", "Cape Verde": "কেপ ভার্দে", "Colombia": "কলম্বিয়া", "Ghana": "ঘানা"};
+    const cityBn = {"Los Angeles": "লস অ্যাঞ্জেলেস", "Houston": "হিউস্টন", "Boston": "বস্টন", "Monterrey": "মন্টেরে", "Dallas": "ডালাস", "New York/New Jersey": "নিউ ইয়র্ক/নিউ জার্সি", "Mexico City": "মেক্সিকো সিটি", "Atlanta": "আটলান্টা", "Seattle": "সিয়াটল", "San Francisco Bay Area": "সান ফ্রান্সিসকো বে এরিয়া", "Toronto": "টরন্টো", "Vancouver": "ভ্যাঙ্কুভার", "Miami": "মায়ামি", "Kansas City": "কানসাস সিটি"};
+
+
+    // ---------- helpers ----------
     const RESULT_FEED_URL = './worldcup-results.json';
     const RESULT_REFRESH_MS = 60 * 1000;
+    const MATCH_WINDOW_MS = 115 * 60 * 1000;
+    const resultFeed = new Map();
+    let feedMeta = { loaded:false, updatedAt:null, source:'', error:null };
+    let currentFilter = 'all';
 
-    const flagCodes = {
-      'Mexico': 'mx', 'South Africa': 'za', 'Korea Republic': 'kr', 'Czechia': 'cz',
-      'Canada': 'ca', 'Bosnia & Herzegovina': 'ba', 'Qatar': 'qa', 'Switzerland': 'ch',
-      'Brazil': 'br', 'Morocco': 'ma', 'Haiti': 'ht', 'Scotland': 'gb-sct',
-      'USA': 'us', 'Paraguay': 'py', 'Australia': 'au', 'Türkiye': 'tr',
-      'Germany': 'de', 'Curaçao': 'cw', 'Ivory Coast': 'ci', 'Ecuador': 'ec',
-      'Netherlands': 'nl', 'Japan': 'jp', 'Sweden': 'se', 'Tunisia': 'tn',
-      'Belgium': 'be', 'Egypt': 'eg', 'Iran': 'ir', 'New Zealand': 'nz',
-      'Spain': 'es', 'Cape Verde': 'cv', 'Saudi Arabia': 'sa', 'Uruguay': 'uy',
-      'France': 'fr', 'Senegal': 'sn', 'Iraq': 'iq', 'Norway': 'no',
-      'Argentina': 'ar', 'Algeria': 'dz', 'Austria': 'at', 'Jordan': 'jo',
-      'Portugal': 'pt', 'DR Congo': 'cd', 'Uzbekistan': 'uz', 'Colombia': 'co',
-      'England': 'gb-eng', 'Croatia': 'hr', 'Ghana': 'gh', 'Panama': 'pa'
-    };
-
-    const countryBn = {
-      'Mexico': 'মেক্সিকো', 'South Africa': 'দক্ষিণ আফ্রিকা', 'Korea Republic': 'দক্ষিণ কোরিয়া', 'Czechia': 'চেকিয়া',
-      'Canada': 'কানাডা', 'Bosnia & Herzegovina': 'বসনিয়া ও হার্জেগোভিনা', 'Qatar': 'কাতার', 'Switzerland': 'সুইজারল্যান্ড',
-      'Brazil': 'ব্রাজিল', 'Morocco': 'মরক্কো', 'Haiti': 'হাইতি', 'Scotland': 'স্কটল্যান্ড',
-      'USA': 'যুক্তরাষ্ট্র', 'Paraguay': 'প্যারাগুয়ে', 'Australia': 'অস্ট্রেলিয়া', 'Türkiye': 'তুরস্ক',
-      'Germany': 'জার্মানি', 'Curaçao': 'কুরাসাও', 'Ivory Coast': 'আইভরি কোস্ট', 'Ecuador': 'ইকুয়েডর',
-      'Netherlands': 'নেদারল্যান্ডস', 'Japan': 'জাপান', 'Sweden': 'সুইডেন', 'Tunisia': 'তিউনিসিয়া',
-      'Belgium': 'বেলজিয়াম', 'Egypt': 'মিশর', 'Iran': 'ইরান', 'New Zealand': 'নিউজিল্যান্ড',
-      'Spain': 'স্পেন', 'Cape Verde': 'কেপ ভার্দে', 'Saudi Arabia': 'সৌদি আরব', 'Uruguay': 'উরুগুয়ে',
-      'France': 'ফ্রান্স', 'Senegal': 'সেনেগাল', 'Iraq': 'ইরাক', 'Norway': 'নরওয়ে',
-      'Argentina': 'আর্জেন্টিনা', 'Algeria': 'আলজেরিয়া', 'Austria': 'অস্ট্রিয়া', 'Jordan': 'জর্ডান',
-      'Portugal': 'পর্তুগাল', 'DR Congo': 'ডিআর কঙ্গো', 'Uzbekistan': 'উজবেকিস্তান', 'Colombia': 'কলম্বিয়া',
-      'England': 'ইংল্যান্ড', 'Croatia': 'ক্রোয়েশিয়া', 'Ghana': 'ঘানা', 'Panama': 'পানামা'
-    };
-
-    const cityBn = {
-      'Mexico City': 'মেক্সিকো সিটি', 'Guadalajara': 'গুয়াদালাহারা', 'Atlanta': 'আটলান্টা', 'Monterrey': 'মন্টেরে',
-      'Toronto': 'টরন্টো', 'San Francisco Bay Area': 'সান ফ্রান্সিসকো বে এরিয়া', 'Los Angeles': 'লস অ্যাঞ্জেলেস', 'Vancouver': 'ভ্যাঙ্কুভার', 'Seattle': 'সিয়াটল',
-      'New York/New Jersey': 'নিউ ইয়র্ক/নিউ জার্সি', 'Boston': 'বস্টন', 'Philadelphia': 'ফিলাডেলফিয়া', 'Miami': 'মায়ামি',
-      'Houston': 'হিউস্টন', 'Kansas City': 'কানসাস সিটি', 'Dallas': 'ডালাস'
-    };
-
-    const groupBn = { A: 'গ্রুপ এ', B: 'গ্রুপ বি', C: 'গ্রুপ সি', D: 'গ্রুপ ডি', E: 'গ্রুপ ই', F: 'গ্রুপ এফ', G: 'গ্রুপ জি', H: 'গ্রুপ এইচ', I: 'গ্রুপ আই', J: 'গ্রুপ জে', K: 'গ্রুপ কে', L: 'গ্রুপ এল' };
-    const monthsBn = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
     const banglaDigits = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
-    const crownSvg = document.getElementById('crownTemplate').innerHTML.trim();
+    const monthsBn = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+    const bd = v => String(v).replace(/\d/g,d=>banglaDigits[+d]);
+    const bdDate = iso => new Date(new Date(iso).getTime() + 6*3600*1000);
+    function fmtDate(iso){ const d=bdDate(iso); return `${bd(d.getUTCDate())} ${monthsBn[d.getUTCMonth()]}, ${bd(d.getUTCFullYear())}`; }
+    function descr(h){ if(h>=4&&h<=5)return'ভোর'; if(h>=6&&h<=10)return'সকাল'; if(h>=11&&h<=14)return'দুপুর'; if(h>=15&&h<=17)return'বিকাল'; if(h>=18&&h<=19)return'সন্ধ্যা'; return'রাত'; }
+    function fmtTime(iso){ const d=bdDate(iso); const h=d.getUTCHours(); const m=String(d.getUTCMinutes()).padStart(2,'0'); const hh=h%12||12; return `${descr(h)} ${bd(hh)}:${bd(m)}`; }
+    const nameBn = c => countryBn[c] || c;
+    const flagSrc = c => `https://flagcdn.com/w80/${flagCodes[c]||'un'}.png`;
+    const flagImg = c => `<img class="flag" src="${flagSrc(c)}" alt="${c}" onerror="this.style.visibility='hidden'"/>`;
 
-    function toBanglaDigits(value) {
-      return String(value).replace(/\d/g, d => banglaDigits[Number(d)]);
-    }
-
-    function bdDateObj(utcIso) {
-      return new Date(new Date(utcIso).getTime() + (6 * 60 * 60 * 1000));
-    }
-
-    function formatBdDate(utcIso) {
-      const d = bdDateObj(utcIso);
-      return `${toBanglaDigits(d.getUTCDate())} ${monthsBn[d.getUTCMonth()]}, ${toBanglaDigits(d.getUTCFullYear())}`;
-    }
-
-    function timeDescriptor(hour) {
-      if (hour >= 4 && hour <= 5) return 'ভোর';
-      if (hour >= 6 && hour <= 10) return 'সকাল';
-      if (hour >= 11 && hour <= 14) return 'দুপুর';
-      if (hour >= 15 && hour <= 17) return 'বিকাল';
-      if (hour >= 18 && hour <= 19) return 'সন্ধ্যা';
-      return 'রাত';
-    }
-
-    function formatBdTime(utcIso) {
-      const d = bdDateObj(utcIso);
-      const h = d.getUTCHours();
-      const m = String(d.getUTCMinutes()).padStart(2, '0');
-      const displayHour = h % 12 || 12;
-      return `${timeDescriptor(h)} ${toBanglaDigits(displayHour)}:${toBanglaDigits(m)}`;
-    }
-
-    function flagSrc(country) {
-      const code = flagCodes[country] || 'un';
-      return `https://flagcdn.com/w80/${code}.png`;
-    }
-
-    function normalizeStatus(status) {
-      const value = String(status || '').toLowerCase();
-      if (['final', 'finished', 'complete', 'completed', 'ft', 'fulltime', 'full-time'].includes(value)) return 'finished';
-      if (['live', 'in_play', 'in-play', 'playing', '1h', '2h', 'ht'].includes(value)) return 'live';
-      return 'scheduled';
-    }
-
-    function validScore(score) {
-      if (!score || typeof score !== 'object') return false;
-      return Number.isFinite(Number(score.a)) && Number.isFinite(Number(score.b));
-    }
-
-    function normalizeResult(entry) {
-      if (!entry || !entry.id) return null;
-      const score = validScore(entry.score) ? { a: Number(entry.score.a), b: Number(entry.score.b) } : null;
-      const normalized = {
-        id: String(entry.id),
-        status: normalizeStatus(entry.status),
-        score,
-        minute: Number.isFinite(Number(entry.minute)) ? Number(entry.minute) : null,
-        elapsedSeconds: Number.isFinite(Number(entry.elapsedSeconds)) ? Number(entry.elapsedSeconds) : null,
-        source: entry.source || null,
-        updatedAt: entry.updatedAt || null
-      };
-      return normalized;
-    }
-
-    function applyResultData(data) {
-      const items = Array.isArray(data?.results) ? data.results : [];
-      const nextMap = new Map();
-      for (const item of EMBEDDED_VERIFIED_RESULTS) {
-        const normalized = normalizeResult(item);
-        if (normalized) nextMap.set(normalized.id, normalized);
-      }
-      for (const item of items) {
-        const normalized = normalizeResult(item);
-        if (!normalized) continue;
-        nextMap.set(normalized.id, normalized);
-      }
+    // ---------- feed ----------
+    function normStatus(s){ s=String(s||'').toLowerCase(); if(['final','finished','complete','completed','ft','full-time'].includes(s))return'finished'; if(['live','in_play','in-play','playing','1h','2h','ht'].includes(s))return'live'; return'scheduled'; }
+    function validScore(s){ return s && Number.isFinite(+s.a) && Number.isFinite(+s.b); }
+    function applyResultData(data){
+      const items = Array.isArray(data?.results)?data.results:[];
       resultFeed.clear();
-      nextMap.forEach((value, key) => resultFeed.set(key, value));
-      feedMeta = {
-        loaded: true,
-        updatedAt: data?.updatedAt || new Date().toISOString(),
-        source: data?.source || 'worldcup-results.json',
-        error: null
-      };
+      for(const it of items){
+        if(!it||!it.id) continue;
+        resultFeed.set(String(it.id), {
+          id:String(it.id), status:normStatus(it.status),
+          score: validScore(it.score)?{a:+it.score.a,b:+it.score.b}:null,
+          winner: (it.winner==='a'||it.winner==='b')?it.winner:null,
+          source: it.source||null, updatedAt: it.updatedAt||null
+        });
+      }
+      feedMeta = { loaded:true, updatedAt:data?.updatedAt||new Date().toISOString(), source:data?.source||'worldcup-results.json', error:null };
       updateFeedStatus();
     }
-
-    async function loadResultFeed() {
-      try {
-        const response = await fetch(`${RESULT_FEED_URL}?v=${Date.now()}`, { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        applyResultData(data);
-      } catch (error) {
-        // Keep the embedded verified baseline active if the external JSON is missing/stale.
-        if (!resultFeed.size) applyResultData({ results: [] });
-        feedMeta.error = error?.message || 'Feed load failed';
-        updateFeedStatus();
-      }
+    async function loadResultFeed(){
+      try{
+        const r = await fetch(`${RESULT_FEED_URL}?v=${Date.now()}`,{cache:'no-store'});
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        applyResultData(await r.json());
+      }catch(e){ feedMeta.error=e?.message||'feed failed'; updateFeedStatus(); }
+    }
+    function updateFeedStatus(){
+      const el=document.getElementById('data-source-status'); if(!el) return;
+      if(feedMeta.error && !feedMeta.loaded){ el.textContent='⚠️ JSON ফিড পাওয়া যায়নি'; el.className='text-amber-200'; return; }
+      const fin=[...resultFeed.values()].filter(r=>r.status==='finished'&&r.score).length;
+      el.innerHTML = `✅ ফিড সংযুক্ত • ${bd(fin)} ম্যাচ সম্পন্ন`;
+      el.className='text-emerald-200';
     }
 
-    function updateFeedStatus() {
-      const el = document.getElementById('data-source-status');
-      if (!el) return;
-      if (feedMeta.error && !feedMeta.loaded) {
-        el.textContent = 'JSON feed পাওয়া যায়নি';
-        el.className = 'text-amber-200';
-        return;
-      }
-      const count = resultFeed.size;
-      el.textContent = `${count} verified result${count === 1 ? '' : 's'} loaded`;
-      el.className = 'text-emerald-200';
+    // ---------- result + winner logic ----------
+    function decideWinner(res){
+      if(!res || res.status!=='finished' || !res.score) return null;
+      if(res.score.a>res.score.b) return 'a';
+      if(res.score.b>res.score.a) return 'b';
+      return res.winner; // draw -> needs shootout winner field
+    }
+    // resolve any node (M.. / R16.. / QF.. / SF.. / F-1) -> {t1,t2,res,winSide,winName}
+    const bracketById = {};
+    BRACKET.r16.concat(BRACKET.qf, BRACKET.sf, [BRACKET.final]).forEach(n=>bracketById[n.id]=n);
+    const r32ById = {}; R32.forEach(m=>r32ById[m.id]=m);
+
+    function placeholder(srcId){
+      if(srcId[0]==='M') return `ম্যাচ ${bd(srcId.slice(1))} বিজয়ী`;
+      if(srcId.startsWith('R16')) return 'শেষ ১৬ বিজয়ী';
+      if(srcId.startsWith('QF')) return 'কোয়ার্টার বিজয়ী';
+      if(srcId.startsWith('SF')) return 'সেমি বিজয়ী';
+      return 'বিজয়ী';
+    }
+    function teamOf(nodeId){ // winner team name advancing FROM this node, or null
+      return resolveNode(nodeId).winName;
+    }
+    function resolveNode(id){
+      let t1=null,t2=null,p1='',p2='';
+      if(r32ById[id]){ const m=r32ById[id]; t1=m.a; t2=m.b; p1=nameBn(m.a); p2=nameBn(m.b); }
+      else { const n=bracketById[id]; t1=teamOf(n.from[0]); t2=teamOf(n.from[1]); p1=placeholder(n.from[0]); p2=placeholder(n.from[1]); }
+      const res=resultFeed.get(id)||null;
+      const side=decideWinner(res);
+      let winName=null;
+      if(side==='a') winName=t1; else if(side==='b') winName=t2;
+      return {id,t1,t2,p1,p2,res,winSide:side,winName};
     }
 
-    function scoreFromVerifiedFeed(match) {
-      if (FORCE_CANADA_LIVE_DEMO && match.id === OVERRIDE_ID) return { a: 0, b: 1, winner: 'b', verified: true };
-      const result = resultFeed.get(match.id);
-      if (!result || !result.score) return null;
-      const a = result.score.a;
-      const b = result.score.b;
-      return { a, b, winner: a > b ? 'a' : b > a ? 'b' : null, verified: true };
+    // ---------- fixtures grid ----------
+    function getState(m){
+      const res=resultFeed.get(m.id);
+      if(res?.status==='finished'&&res.score) return 'finished';
+      if(res?.status==='live') return 'live';
+      const now=Date.now(); const t=new Date(m.utc).getTime();
+      if(now>=t && now<t+MATCH_WINDOW_MS) return 'live';
+      if(now>=t+MATCH_WINDOW_MS) return res?.score?'finished':'scheduled';
+      return 'scheduled';
     }
-
-    function getState(match, now = Date.now()) {
-      if (FORCE_CANADA_LIVE_DEMO && match.id === OVERRIDE_ID) {
-        const elapsed = overrideBaseSeconds + Math.floor((now - pageLoadedAt) / 1000);
-        return { type: 'live', elapsed, verifiedScore: true, pendingScore: false, forced: true };
-      }
-
-      const result = resultFeed.get(match.id);
-      const start = new Date(match.utc).getTime();
-      const end = start + MATCH_DURATION_SECONDS * 1000;
-
-      if (result?.status === 'finished') {
-        return { type: 'finished', elapsed: MATCH_DURATION_SECONDS, verifiedScore: Boolean(result.score), pendingScore: !result.score, source: result.source || null };
-      }
-      if (result?.status === 'live') {
-        const elapsed = result.elapsedSeconds ?? (result.minute != null ? result.minute * 60 : Math.max(0, Math.floor((now - start) / 1000)));
-        return { type: 'live', elapsed, verifiedScore: Boolean(result.score), pendingScore: !result.score, source: result.source || null };
-      }
-      if (result?.status === 'scheduled' && now < start) {
-        return { type: 'upcoming', elapsed: 0, verifiedScore: false, pendingScore: false };
-      }
-
-      if (now < start) return { type: 'upcoming', elapsed: 0, verifiedScore: false, pendingScore: false };
-      if (now <= end) return { type: 'live', elapsed: Math.floor((now - start) / 1000), verifiedScore: false, pendingScore: true };
-      return { type: 'finished', elapsed: MATCH_DURATION_SECONDS, verifiedScore: false, pendingScore: true };
+    function badge(state){
+      if(state==='live') return '<span class="inline-flex items-center gap-1.5 rounded-full border border-red-300/30 bg-red-500/15 px-3 py-1.5 text-xs font-black text-red-100"><span class="h-2 w-2 rounded-full bg-red-400 live-dot"></span>লাইভ</span>';
+      if(state==='finished') return '<span class="rounded-full border border-sky-300/25 bg-sky-500/15 px-3 py-1.5 text-xs font-black text-sky-100">সম্পন্ন</span>';
+      return '<span class="rounded-full border border-emerald-300/25 bg-emerald-500/15 px-3 py-1.5 text-xs font-black text-emerald-100">আসন্ন</span>';
     }
-
-    function findNextMatchId(now = Date.now()) {
-      let candidate = null;
-      for (const match of MATCHES) {
-        const start = new Date(match.utc).getTime();
-        if (start > now && (!candidate || start < new Date(candidate.utc).getTime())) candidate = match;
-      }
-      return candidate?.id || null;
+    function teamTile(team, score, isWin, state){
+      const loserClass = (state==='finished' && !isWin) ? 'loser' : '';
+      return `<div class="team-tile ${isWin?'winner':''} ${loserClass} relative flex flex-1 flex-col items-center justify-center rounded-2xl px-2 py-3 text-center">
+        ${isWin ? '<div class="absolute top-2 text-base">👑</div>' : ''}
+        <div class="${isWin?'mt-4':''}">${flagImg(team)}</div>
+        <p class="mt-2 line-clamp-2 text-[13px] font-black leading-tight text-slate-100">${nameBn(team)}</p>
+        <p class="mt-1 max-w-[88px] truncate text-[9px] font-black uppercase tracking-[.16em] text-slate-500">${team}</p>
+      </div>`;
     }
-
-    function formatTimer(totalSeconds) {
-      const m = Math.floor(totalSeconds / 60);
-      const s = totalSeconds % 60;
-      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    function scoreBlock(res, state){
+      const showScore = state!=='scheduled' && res?.score && Number.isFinite(res.score.a) && Number.isFinite(res.score.b);
+      const scoreText = showScore ? `${bd(res.score.a)} - ${bd(res.score.b)}` : 'VS';
+      const label = state==='finished' ? 'পূর্ণ সময়' : state==='live' ? 'লাইভ' : 'কিকঅফ';
+      return `<div class="score-capsule flex flex-col items-center justify-center rounded-2xl px-2 py-2 text-center">
+        <div class="${state==='live'?'text-red-200 bg-red-400/15 border-red-300/25':'text-slate-200 bg-slate-400/10 border-white/10'} rounded-full border px-2 py-1 text-[10px] font-black">${state==='live'?'● লাইভ': state==='finished'?'সমাপ্ত':'BDT'}</div>
+        <p class="mt-2 whitespace-nowrap text-xl font-black tracking-tight text-white">${scoreText}</p>
+        <p class="mt-1 text-[10px] font-bold text-slate-400">${label}</p>
+      </div>`;
     }
-
-    function specialClass(match) {
-      const teams = [match.team1, match.team2];
-      if (teams.includes('Brazil')) return 'highlight-brazil';
-      if (teams.includes('Argentina')) return 'highlight-argentina';
-      if (teams.includes('Portugal')) return 'highlight-portugal';
-      if (teams.includes('France')) return 'highlight-france';
-      if (teams.includes('Germany')) return 'highlight-germany';
-      return '';
-    }
-
-    function createTeamBlock(match, side) {
-      const country = side === 'a' ? match.team1 : match.team2;
-      return `
-        <div id="team-${match.id}-${side}" class="team-block flex min-w-0 flex-1 flex-col items-center rounded-2xl border border-white/10 bg-white/[.035] px-2 py-3 text-center transition duration-200">
-          <div id="crown-${match.id}-${side}" class="h-5 opacity-0 transition-opacity duration-200">${crownSvg}</div>
-          <img src="${flagSrc(country)}" alt="${country} flag" loading="lazy" class="mt-1 h-10 w-14 rounded-lg border border-white/10 object-cover shadow-lg shadow-black/30" />
-          <p id="name-${match.id}-${side}" class="mt-2 line-clamp-2 text-sm font-black leading-5 text-white">${countryBn[country] || country}</p>
-          <p class="mt-1 text-[10px] font-bold uppercase tracking-widest text-slate-500">${country}</p>
-        </div>`;
-    }
-
-    function renderMatches() {
-      const grid = document.getElementById('matchesGrid');
-      grid.innerHTML = MATCHES.map(match => `
-        <article id="card-${match.id}" data-team1="${match.team1}" data-team2="${match.team2}" class="match-card ${specialClass(match)} rounded-[1.65rem] p-4">
-          <div id="next-${match.id}" class="pointer-events-none absolute right-3 top-3 hidden rounded-full border border-emerald-300/30 bg-emerald-400/15 px-2.5 py-1 text-[10px] font-black text-emerald-100 shadow-[0_0_20px_rgba(16,185,129,.25)] pulse-green">পরবর্তী ম্যাচ</div>
-          <div class="flex items-start justify-between gap-3 pr-24">
+    function renderFixtures(){
+      const grid=document.getElementById('matchesGrid'); grid.innerHTML='';
+      const sorted=[...R32].sort((a,b)=>new Date(a.utc)-new Date(b.utc));
+      for(const m of sorted){
+        const state=getState(m); const res=resultFeed.get(m.id);
+        const side=decideWinner(res);
+        const card=document.createElement('article');
+        card.dataset.state=state;
+        card.className='match-card fixture-card';
+        card.innerHTML=`
+          <div class="relative z-10 flex items-start justify-between gap-2">
             <div>
-              <p class="text-xs font-black uppercase tracking-[.18em] text-sky-200">${groupBn[match.group]}</p>
-              <p class="mt-1 text-sm font-bold text-slate-300">${formatBdDate(match.utc)}</p>
+              <p class="text-[11px] font-black text-sky-200">শেষ ৩২ • ম্যাচ ${bd(m.id.slice(1))}</p>
+              <p class="mt-1 text-[13px] font-extrabold text-slate-200">${fmtDate(m.utc)}</p>
             </div>
-            <div class="rounded-full border border-white/10 bg-white/[.045] px-2.5 py-1 text-[11px] font-black text-slate-300">BDT</div>
+            ${badge(state)}
           </div>
 
-          <div class="mt-4 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-            ${createTeamBlock(match, 'a')}
-            <div class="flex flex-col items-center">
-              <div id="status-${match.id}" class="mb-2 rounded-full px-2.5 py-1 text-[10px] font-black uppercase tracking-widest"></div>
-              <div id="scorebox-${match.id}" class="min-w-[72px] rounded-2xl px-3 py-3 text-center shadow-inner transition-colors duration-200">
-                <p id="score-${match.id}" class="text-lg font-black leading-none">VS</p>
+          <div class="relative z-10 mt-4 flex items-center gap-2">
+            ${teamTile(m.a, res?.score?.a, side==='a', state)}
+            ${scoreBlock(res, state)}
+            ${teamTile(m.b, res?.score?.b, side==='b', state)}
+          </div>
+
+          <div class="relative z-10 mt-4 rounded-2xl border border-white/10 bg-slate-950/44 p-3">
+            <div class="grid grid-cols-[1fr_auto] gap-3">
+              <div class="min-w-0">
+                <p class="text-[10px] font-black uppercase tracking-[.16em] text-slate-500">ভেন্যু</p>
+                <p class="mt-1 truncate text-xs font-extrabold text-slate-200">${cityBn[m.city]||m.city}</p>
+                <p class="mt-0.5 truncate text-[10px] font-semibold text-slate-500">${m.stadium}</p>
               </div>
-              <p id="timer-${match.id}" class="mt-2 h-4 text-[11px] font-extrabold tracking-widest text-slate-400"></p>
+              <div class="compact-time rounded-2xl px-3 py-2 text-right">
+                <p class="text-[10px] font-black uppercase tracking-[.16em] text-amber-200">সময়</p>
+                <p class="mt-1 whitespace-nowrap text-sm font-black text-amber-100">${fmtTime(m.utc)}</p>
+              </div>
             </div>
-            ${createTeamBlock(match, 'b')}
-          </div>
-
-          <div class="mt-4 flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-black/15 px-3 py-2">
-            <div class="min-w-0">
-              <p class="text-[10px] font-bold uppercase tracking-[.18em] text-slate-500">ভেন্যু</p>
-              <p class="truncate text-xs font-extrabold text-slate-300">${cityBn[match.city] || match.city}</p>
-            </div>
-            <div class="text-right">
-              <p class="text-[10px] font-bold uppercase tracking-[.18em] text-slate-500">সময়</p>
-              <p class="text-xs font-extrabold text-slate-200">${formatBdTime(match.utc)}</p>
-            </div>
-          </div>
-        </article>`).join('');
-    }
-
-    function setStatusClasses(match, state) {
-      const card = document.getElementById(`card-${match.id}`);
-      const status = document.getElementById(`status-${match.id}`);
-      const scorebox = document.getElementById(`scorebox-${match.id}`);
-      if (!card || !status || !scorebox) return;
-
-      card.classList.toggle('live-match', state.type === 'live');
-      card.classList.toggle('next-match', match.id === lastNextId && state.type === 'upcoming');
-
-      if (state.type === 'live') {
-        status.innerHTML = '<span class="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-red-400 blink-red"></span>LIVE';
-        status.className = 'mb-2 rounded-full border border-red-300/30 bg-red-500/15 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-red-100';
-        scorebox.className = 'min-w-[72px] rounded-2xl bg-red-600 px-3 py-3 text-center text-white shadow-[0_0_24px_rgba(220,38,38,.45)] transition-colors duration-200';
-      } else if (state.type === 'finished' && state.pendingScore) {
-        status.textContent = 'ফলাফল অপেক্ষমাণ';
-        status.className = 'mb-2 rounded-full border border-amber-300/25 bg-amber-400/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-amber-100';
-        scorebox.className = 'min-w-[72px] rounded-2xl bg-slate-950 px-3 py-3 text-center text-amber-100 shadow-inner ring-1 ring-amber-300/20 transition-colors duration-200';
-      } else if (state.type === 'finished') {
-        status.textContent = 'সমাপ্ত';
-        status.className = 'mb-2 rounded-full border border-slate-400/20 bg-slate-800 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-slate-200';
-        scorebox.className = 'min-w-[72px] rounded-2xl bg-slate-950 px-3 py-3 text-center text-white shadow-inner ring-1 ring-white/10 transition-colors duration-200';
-      } else {
-        status.textContent = match.id === lastNextId ? 'পরবর্তী' : 'আসন্ন';
-        status.className = 'mb-2 rounded-full border border-emerald-300/20 bg-emerald-400/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-widest text-emerald-100';
-        scorebox.className = 'min-w-[72px] rounded-2xl bg-slate-900/90 px-3 py-3 text-center text-white shadow-inner ring-1 ring-white/10 transition-colors duration-200';
+          </div>`;
+        grid.appendChild(card);
       }
-    }
-
-    function updateWinners(match, winner) {
-      const teamA = document.getElementById(`team-${match.id}-a`);
-      const teamB = document.getElementById(`team-${match.id}-b`);
-      const crownA = document.getElementById(`crown-${match.id}-a`);
-      const crownB = document.getElementById(`crown-${match.id}-b`);
-      [teamA, teamB].forEach(el => el?.classList.remove('team-win', 'team-lose'));
-      [crownA, crownB].forEach(el => { if (el) el.style.opacity = 0; });
-      if (winner === 'a') {
-        teamA?.classList.add('team-win');
-        teamB?.classList.add('team-lose');
-        if (crownA) crownA.style.opacity = 1;
-      } else if (winner === 'b') {
-        teamB?.classList.add('team-win');
-        teamA?.classList.add('team-lose');
-        if (crownB) crownB.style.opacity = 1;
-      }
-    }
-
-    function clearWinners(match) {
-      updateWinners(match, null);
-    }
-
-    function setScoreContent(scoreEl, html) {
-      if (scoreEl.innerHTML !== html) scoreEl.innerHTML = html;
-    }
-
-    function updateMatchSoft(match, now = Date.now()) {
-      const state = getState(match, now);
-      const previousKey = lastState.get(match.id);
-      const stateKey = `${state.type}:${state.pendingScore ? 'pending' : 'ready'}`;
-      if (previousKey !== stateKey) {
-        setStatusClasses(match, state);
-        lastState.set(match.id, stateKey);
-      }
-
-      const scoreEl = document.getElementById(`score-${match.id}`);
-      const timerEl = document.getElementById(`timer-${match.id}`);
-      if (!scoreEl || !timerEl) return;
-
-      if (state.type === 'upcoming') {
-        setScoreContent(scoreEl, 'VS');
-        if (timerEl.textContent !== '') timerEl.textContent = '';
-        clearWinners(match);
-        return state.type;
-      }
-
-      const score = scoreFromVerifiedFeed(match);
-      if (!score) {
-        if (state.type === 'live') {
-          setScoreContent(scoreEl, '<span class="text-base">— - —</span>');
-          if (timerEl.textContent !== 'স্কোর অপেক্ষমাণ') timerEl.textContent = 'স্কোর অপেক্ষমাণ';
-        } else {
-          setScoreContent(scoreEl, '<span class="block text-[11px] leading-4">ফলাফল<br>অপেক্ষমাণ</span>');
-          if (timerEl.textContent !== '') timerEl.textContent = '';
-        }
-        clearWinners(match);
-        return state.type;
-      }
-
-      const scoreText = `${score.a} - ${score.b}`;
-      setScoreContent(scoreEl, scoreText);
-
-      if (state.type === 'live') {
-        const timerText = formatTimer(state.elapsed);
-        if (timerEl.textContent !== timerText) timerEl.textContent = timerText;
-        clearWinners(match);
-      } else {
-        if (timerEl.textContent !== 'পূর্ণ সময়') timerEl.textContent = 'পূর্ণ সময়';
-        updateWinners(match, score.winner);
-      }
-      return state.type;
-    }
-
-    function refreshNextBadges(now = Date.now()) {
-      const nextId = findNextMatchId(now);
-      if (nextId === lastNextId) return;
-      const oldId = lastNextId;
-      lastNextId = nextId;
-      if (oldId) {
-        document.getElementById(`next-${oldId}`)?.classList.add('hidden');
-        document.getElementById(`card-${oldId}`)?.classList.remove('next-match');
-        const oldMatch = MATCHES.find(m => m.id === oldId);
-        if (oldMatch) setStatusClasses(oldMatch, getState(oldMatch, now));
-      }
-      if (nextId) {
-        document.getElementById(`next-${nextId}`)?.classList.remove('hidden');
-        document.getElementById(`card-${nextId}`)?.classList.add('next-match');
-        const nextMatch = MATCHES.find(m => m.id === nextId);
-        if (nextMatch) setStatusClasses(nextMatch, getState(nextMatch, now));
-      }
-    }
-
-    function applyFilter() {
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        const active = btn.dataset.filter === currentFilter;
-        btn.classList.toggle('bg-white', active);
-        btn.classList.toggle('text-slate-950', active);
-        btn.classList.toggle('border-white', active);
-        btn.classList.toggle('bg-white/[.04]', !active);
-        btn.classList.toggle('text-slate-200', !active);
-      });
-      const label = document.getElementById('active-filter-label');
-      const filterLabels = { all: 'All Matches', live: 'Live', next: 'Next Match', Brazil: 'Brazil', Argentina: 'Argentina', Portugal: 'Portugal', France: 'France', Germany: 'Germany' };
-      if (label) label.textContent = filterLabels[currentFilter] || currentFilter;
-      const now = Date.now();
-      for (const match of MATCHES) {
-        const card = document.getElementById(`card-${match.id}`);
-        if (!card) continue;
-        const state = getState(match, now);
-        let show = true;
-        if (currentFilter === 'live') show = state.type === 'live';
-        else if (currentFilter === 'next') show = state.type === 'upcoming';
-        else if (currentFilter !== 'all') show = match.team1 === currentFilter || match.team2 === currentFilter;
-        card.classList.toggle('hidden', !show);
-      }
-    }
-
-    function updateStats(now = Date.now()) {
-      let live = 0, upcoming = 0, finished = 0;
-      for (const match of MATCHES) {
-        const type = getState(match, now).type;
-        if (type === 'live') live++;
-        else if (type === 'upcoming') upcoming++;
-        else finished++;
-      }
-      const values = { 'stat-live': live, 'stat-upcoming': upcoming, 'stat-total': MATCHES.length };
-      Object.entries(values).forEach(([id, value]) => {
-        const el = document.getElementById(id);
-        if (el && el.textContent !== String(value)) el.textContent = String(value);
-      });
-    }
-
-    function tick() {
-      const now = Date.now();
-      refreshNextBadges(now);
-      for (const match of MATCHES) updateMatchSoft(match, now);
-      updateStats(now);
-      if (currentFilter === 'live' || currentFilter === 'next') applyFilter();
-    }
-
-    document.addEventListener('click', event => {
-      const btn = event.target.closest('.filter-btn');
-      if (!btn) return;
-      currentFilter = btn.dataset.filter;
       applyFilter();
+    }
+    function applyFilter(){
+      document.querySelectorAll('#matchesGrid .match-card').forEach(c=>{
+        const s=c.dataset.state;
+        let show=true;
+        if(currentFilter==='live') show=s==='live';
+        else if(currentFilter==='next') show=s==='scheduled';
+        else if(currentFilter==='finished') show=s==='finished';
+        c.style.display=show?'':'none';
+      });
+    }
+
+    // ---------- bracket roadmap ----------
+    const roundDefs=[
+      {key:'r32', title:'শেষ ৩২', nodes:R32.map(m=>m.id)},
+      {key:'r16', title:'শেষ ১৬', nodes:BRACKET.r16.map(n=>n.id)},
+      {key:'qf',  title:'কোয়ার্টার', nodes:BRACKET.qf.map(n=>n.id)},
+      {key:'sf',  title:'সেমিফাইনাল', nodes:BRACKET.sf.map(n=>n.id)},
+      {key:'final',title:'ফাইনাল', nodes:[BRACKET.final.id]},
+    ];
+    function bracketTeamRow(name, isPlaceholder, isWin, score, hasResult){
+      const sc=(hasResult && Number.isFinite(score))?bd(score):'';
+      if(isPlaceholder){
+        return `<div class="flex items-center justify-between gap-2 px-2 py-1 text-slate-500">
+          <span class="truncate text-xs italic">${name}</span><span class="text-xs"></span></div>`;
+      }
+      return `<div class="flex items-center justify-between gap-2 rounded-lg px-2 py-1 ${isWin?'win':''}">
+        <span class="flex min-w-0 items-center gap-1.5">${flagImg(name)}<span class="truncate text-xs font-bold ${isWin?'text-emerald-200':'text-slate-100'}">${nameBn(name)}</span></span>
+        <span class="text-xs font-black ${isWin?'text-emerald-200':'text-slate-400'}">${sc}</span></div>`;
+    }
+    function renderBracket(){
+      const wrap=document.getElementById('bracket'); wrap.innerHTML='';
+      for(const rd of roundDefs){
+        const col=document.createElement('div');
+        col.className='flex w-44 shrink-0 flex-col gap-2 sm:w-52';
+        col.innerHTML=`<p class="sticky top-0 rounded-full bg-white/5 px-3 py-1 text-center text-xs font-black text-sky-200">${rd.title}</p>`;
+        const inner=document.createElement('div');
+        inner.className='flex flex-1 flex-col justify-around gap-2';
+        for(const id of rd.nodes){
+          const r=resolveNode(id);
+          const live=resultFeed.get(id)?.status==='live';
+          const decided=!!r.winName;
+          const cell=document.createElement('div');
+          cell.className=`rounded-xl border ${decided?'border-emerald-400/30 bg-emerald-400/[.05]':live?'border-red-400/40 bg-red-400/[.06]':'border-white/10 bg-white/[.03]'} p-1.5`;
+          const t1ph = r.t1===null, t2ph = r.t2===null;
+          cell.innerHTML =
+            bracketTeamRow(t1ph?r.p1:r.t1, t1ph, r.winSide==='a', r.res?.score?.a, !!r.res?.score) +
+            `<div class="my-0.5 border-t border-white/5"></div>` +
+            bracketTeamRow(t2ph?r.p2:r.t2, t2ph, r.winSide==='b', r.res?.score?.b, !!r.res?.score) +
+            (live?`<p class="mt-1 text-center text-[10px] font-black text-red-300">● লাইভ</p>`:'');
+          inner.appendChild(cell);
+        }
+        col.appendChild(inner);
+        wrap.appendChild(col);
+      }
+      // champion
+      const champ=resolveNode(BRACKET.final.id).winName;
+      const banner=document.getElementById('champBanner');
+      if(champ){
+        banner.classList.remove('hidden');
+        banner.innerHTML=`<p class="text-xs font-bold uppercase tracking-widest text-amber-300/80">বিশ্ব চ্যাম্পিয়ন</p>
+          <div class="mt-2 flex items-center justify-center gap-3"><img class="h-7 w-11 rounded object-cover shadow-lg" src="${flagSrc(champ)}" alt="${champ}"/>
+          <span class="text-2xl font-black text-amber-100">🏆 ${nameBn(champ)}</span></div>`;
+      } else { banner.classList.add('hidden'); }
+    }
+
+    function updateStats(){
+      let live=0,up=0,fin=0;
+      for(const m of R32){ const s=getState(m); if(s==='live')live++; else if(s==='finished')fin++; else up++; }
+      document.getElementById('stat-total').textContent=bd(R32.length);
+      document.getElementById('stat-live').textContent=bd(live);
+      document.getElementById('stat-upcoming').textContent=bd(up);
+      document.getElementById('stat-finished').textContent=bd(fin);
+    }
+
+    function tick(){ renderFixtures(); renderBracket(); updateStats(); }
+
+    document.addEventListener('click',e=>{
+      const b=e.target.closest('.filter-btn'); if(!b) return;
+      document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); currentFilter=b.dataset.filter; applyFilter();
     });
 
-    applyResultData({ results: [] });
-    renderMatches();
-    refreshNextBadges();
-    for (const match of MATCHES) {
-      const state = getState(match);
-      lastState.set(match.id, null);
-      setStatusClasses(match, state);
-      updateMatchSoft(match);
-    }
-    updateStats();
-    applyFilter();
+    // boot
     loadResultFeed().then(tick);
-    setInterval(tick, 1000);
-    setInterval(() => loadResultFeed().then(tick), RESULT_REFRESH_MS);
+    setInterval(tick, 1000*30);
+    setInterval(()=>loadResultFeed().then(tick), RESULT_REFRESH_MS);
   </script>
 </body>
 </html>
