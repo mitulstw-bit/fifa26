@@ -115,12 +115,38 @@
     }
     .filter-btn{ height:38px; }
 
+
+    /* Full-width page fit: removes the large left/right empty space on 1920px screens */
+    html,body{ width:100%; overflow-x:hidden; }
+    .site-shell{ width:100%; max-width:none !important; margin:0 !important; padding:.65rem !important; }
+    @media (min-width:640px){ .site-shell{ padding:.85rem 1rem !important; } }
+    @media (min-width:1280px){ .site-shell{ padding:1rem 1.25rem !important; } }
+    .hero-compact{ padding:1.15rem 1.4rem !important; border-radius:1.45rem !important; }
+    .fixtures-shell{ padding:1rem !important; border-radius:1.45rem !important; }
+    .section-tight{ margin-top:1rem !important; }
+    .fixture-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(292px,1fr)); gap:.95rem; }
+    @media (min-width:1600px){ .fixture-grid{ grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; } }
+    @media (max-width:680px){ .fixture-grid{ grid-template-columns:1fr; } }
+    .fixture-card{ min-height:305px; padding:.9rem !important; border-radius:1.35rem !important; }
+    .team-tile{ min-height:112px; }
+    .fixture-card .flag{ width:48px;height:32px; }
+    .score-capsule{ min-width:68px; }
+    .compact-time{ padding:.55rem .75rem !important; }
+    .roadmap-section,.map-section{ margin-top:1rem !important; padding:1rem !important; border-radius:1.45rem !important; }
+    #bracket{ width:100%; }
+
+
+    .refresh-action{ border:1px solid rgba(125,211,252,.30); background:rgba(14,165,233,.10); }
+    .refresh-action:hover{ background:rgba(14,165,233,.18); }
+    .feed-flash{ animation:feedFlash .9s ease; }
+    @keyframes feedFlash{ 0%{box-shadow:0 0 0 0 rgba(52,211,153,.38)} 100%{box-shadow:0 0 0 12px rgba(52,211,153,0)} }
+
   </style>
 </head>
 <body class="text-slate-100">
-  <main class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+  <main class="site-shell">
 
-    <header class="glass rounded-3xl p-5 sm:p-7">
+    <header class="hero-compact glass">
       <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <p class="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-1 text-xs font-bold text-amber-200">
@@ -135,20 +161,20 @@
             <span id="data-source-status" class="text-slate-400">ফল ফিড লোড হচ্ছে…</span>
           </div>
         </div>
-        <div class="grid w-full max-w-md grid-cols-2 gap-3 sm:grid-cols-4 lg:w-auto">
-          <div class="rounded-3xl border border-white/10 bg-white/[.045] p-4 text-center shadow-inner">
-            <p id="stat-total" class="text-2xl font-black text-white">১৬</p>
+        <div class="grid w-full max-w-sm grid-cols-4 gap-2 lg:w-auto">
+          <div class="rounded-2xl border border-white/10 bg-white/[.045] p-3 text-center shadow-inner">
+            <p id="stat-total" class="text-xl font-black text-white">১৬</p>
             <p class="mt-1 text-xs font-semibold text-slate-400">ম্যাচ</p>
           </div>
-          <div class="rounded-3xl border border-red-400/20 bg-red-400/[.06] p-4 text-center shadow-inner">
+          <div class="rounded-2xl border border-red-400/20 bg-red-400/[.06] p-3 text-center shadow-inner">
             <p id="stat-live" class="text-2xl font-black text-red-200">০</p>
             <p class="mt-1 text-xs font-semibold text-slate-400">লাইভ</p>
           </div>
-          <div class="rounded-3xl border border-emerald-400/20 bg-emerald-400/[.06] p-4 text-center shadow-inner">
+          <div class="rounded-2xl border border-emerald-400/20 bg-emerald-400/[.06] p-3 text-center shadow-inner">
             <p id="stat-upcoming" class="text-2xl font-black text-emerald-200">০</p>
             <p class="mt-1 text-xs font-semibold text-slate-400">আসন্ন</p>
           </div>
-          <div class="rounded-3xl border border-sky-400/20 bg-sky-400/[.06] p-4 text-center shadow-inner">
+          <div class="rounded-2xl border border-sky-400/20 bg-sky-400/[.06] p-3 text-center shadow-inner">
             <p id="stat-finished" class="text-2xl font-black text-sky-200">০</p>
             <p class="mt-1 text-xs font-semibold text-slate-400">সম্পন্ন</p>
           </div>
@@ -157,19 +183,19 @@
     </header>
 
     <!-- FIXTURES FIRST -->
-    <section class="fixtures-shell mt-5 glass soft-grid rounded-3xl">
+    <section class="fixtures-shell section-tight glass soft-grid">
       <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p class="section-kicker text-xs font-black text-amber-200">Step 01 • Fixtures first</p>
           <h2 class="mt-1 text-2xl font-black leading-tight text-white sm:text-3xl">📅 শেষ ৩২ ফিক্সচার</h2>
           <p class="mt-2 max-w-2xl text-sm text-slate-400 sm:text-base">কার্ডগুলো কমপ্যাক্ট করা হয়েছে — আপনার দেওয়া রেফারেন্সের মতো ৪ কলাম ভিউ, পরিষ্কার স্কোর, ভেন্যু ও হাইলাইটেড সময়।</p>
         </div>
-        <div class="order-badge rounded-3xl px-4 py-3 text-sm font-extrabold text-sky-100 shadow-lg">
+        <div class="order-badge rounded-2xl px-3 py-2 text-xs font-extrabold text-sky-100 shadow-lg">
           প্রথমে ফিক্সচার • তারপর রোডম্যাপ • শেষে ম্যাপ
         </div>
       </div>
 
-      <nav class="mt-5 rounded-3xl border border-white/10 bg-slate-950/48 p-2 backdrop-blur-xl">
+      <nav class="mt-4 rounded-3xl border border-white/10 bg-slate-950/48 p-2 backdrop-blur-xl">
         <div class="flex items-center gap-2 overflow-x-auto scrollbar-none">
           <button data-filter="all" class="filter-btn active shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-sky-300/50 hover:bg-sky-300/10">সব ম্যাচ</button>
           <button data-filter="live" class="filter-btn shrink-0 rounded-full border border-white/10 px-4 py-2 text-sm font-extrabold transition hover:border-red-300/50 hover:bg-red-300/10">লাইভ</button>
@@ -178,20 +204,24 @@
         </div>
       </nav>
 
-      <section id="matchesGrid" class="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"></section>
+      <section id="matchesGrid" class="fixture-grid mt-4"></section>
     </section>
 
     <!-- LIVE ROADMAP -->
-    <section class="mt-6 glass rounded-3xl p-5 sm:p-7">
+    <section class="roadmap-section glass">
       <div class="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p class="section-kicker text-xs font-black text-sky-200">Step 02 • Live bracket</p>
           <h2 class="mt-2 text-2xl font-black text-white sm:text-3xl">🗺️ লাইভ রোডম্যাপ — শেষ ৩২ → ফাইনাল</h2>
           <p class="mt-1 max-w-2xl text-sm text-slate-400">ফল ফিডে কোনো দল জিতলে/হারলে এই ব্র্যাকেট স্বয়ংক্রিয়ভাবে আপডেট হয়। জয়ী দল পরের রাউন্ডে উঠে যাবে।</p>
         </div>
-        <span class="inline-flex items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1.5 text-xs font-bold text-emerald-200">
-          <span class="h-2 w-2 rounded-full bg-emerald-400 live-dot"></span> অটো-আপডেট চালু
-        </span>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1.5 text-xs font-bold text-emerald-200">
+            <span class="h-2 w-2 rounded-full bg-emerald-400 live-dot"></span> অটো-আপডেট চালু
+          </span>
+          <button id="refreshResults" type="button" class="refresh-action rounded-full px-3 py-1.5 text-xs font-black text-sky-100">↻ এখনই রিফ্রেশ</button>
+          <span id="last-checked" class="rounded-full border border-white/10 bg-white/[.04] px-3 py-1.5 text-xs font-bold text-slate-400">চেক হচ্ছে…</span>
+        </div>
       </div>
 
       <div id="champBanner" class="mt-4 hidden rounded-3xl border border-amber-300/40 bg-amber-300/[.08] p-5 text-center champ-glow"></div>
@@ -202,7 +232,7 @@
     </section>
 
     <!-- ROADMAP MAP -->
-    <section class="mt-6 glass rounded-3xl p-5 sm:p-7">
+    <section class="map-section glass">
       <div class="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p class="section-kicker text-xs font-black text-amber-200">Step 03 • Fixture map</p>
@@ -219,8 +249,8 @@
       <p class="mt-3 text-xs font-semibold text-slate-500">ফাইনাল: ১৯ জুলাই ২০২৬ • MetLife Stadium, New York/New Jersey</p>
     </section>
 
-    <footer class="mt-8 pb-6 text-center text-xs text-slate-500">
-      ডেটা সোর্স: <code>worldcup-results.json</code> • প্রতি ৬০ সেকেন্ডে রিফ্রেশ • অনুমান-নির্ভর স্কোর নয়, কেবল যাচাইকৃত ফল।
+    <footer class="mt-4 pb-3 text-center text-xs text-slate-500">
+      ডেটা সোর্স: <code>worldcup-results.json</code> • প্রতি ১৫ সেকেন্ডে রিফ্রেশ • অনুমান-নির্ভর স্কোর নয়, কেবল যাচাইকৃত ফল।
     </footer>
   </main>
 
@@ -235,7 +265,7 @@
 
     // ---------- helpers ----------
     const RESULT_FEED_URL = './worldcup-results.json';
-    const RESULT_REFRESH_MS = 60 * 1000;
+    const RESULT_REFRESH_MS = 15 * 1000;
     const MATCH_WINDOW_MS = 115 * 60 * 1000;
     const resultFeed = new Map();
     let feedMeta = { loaded:false, updatedAt:null, source:'', error:null };
@@ -253,44 +283,136 @@
     const flagImg = c => `<img class="flag" src="${flagSrc(c)}" alt="${c}" onerror="this.style.visibility='hidden'"/>`;
 
     // ---------- feed ----------
-    function normStatus(s){ s=String(s||'').toLowerCase(); if(['final','finished','complete','completed','ft','full-time'].includes(s))return'finished'; if(['live','in_play','in-play','playing','1h','2h','ht'].includes(s))return'live'; return'scheduled'; }
-    function validScore(s){ return s && Number.isFinite(+s.a) && Number.isFinite(+s.b); }
+    function firstDefined(...vals){ return vals.find(v => v !== undefined && v !== null && v !== ''); }
+    function numVal(v){
+      if(v === undefined || v === null || v === '') return null;
+      const n = Number(String(v).replace(/[^0-9.-]/g,''));
+      return Number.isFinite(n) ? n : null;
+    }
+    function normStatus(s){
+      s = String(s || '').toLowerCase().trim().replace(/[\s-]+/g,'_');
+      if(['final','finished','finish','complete','completed','closed','ended','end','ft','fulltime','full_time','full_time_result','full_time_after_extra_time','after_extra_time','aet','after_penalties','penalties','penalty_shootout'].includes(s)) return 'finished';
+      if(['live','in_play','inplay','playing','running','started','first_half','second_half','halftime','half_time','ht','1h','2h','et','extra_time'].includes(s)) return 'live';
+      return 'scheduled';
+    }
+    function normalizeId(raw){
+      const v = firstDefined(raw?.id, raw?.matchId, raw?.match_id, raw?.matchNo, raw?.match_no, raw?.matchNumber, raw?.match_number, raw?.number, raw?.gameId, raw?.game_id);
+      if(v === undefined || v === null) return null;
+      const s = String(v).trim();
+      if(/^M\d+$/i.test(s)) return s.toUpperCase();
+      if(/^\d+$/.test(s)) return `M${s}`;
+      const m = s.match(/(?:match|game|m)[\s_-]*(\d+)/i);
+      return m ? `M${m[1]}` : s;
+    }
+    function extractScore(it){
+      const textScore = firstDefined(
+        typeof it?.score === 'string' ? it.score : null,
+        it?.result, it?.scoreText, it?.score_text, it?.fullTimeScore, it?.full_time_score
+      );
+      if(textScore){
+        const m = String(textScore).match(/(\d+)\D+(\d+)/);
+        if(m) return {a:Number(m[1]), b:Number(m[2])};
+      }
+      const a = numVal(firstDefined(
+        it?.score?.a, it?.score?.home, it?.score?.homeScore, it?.score?.home_score, it?.score?.team1, it?.score?.team1Score,
+        it?.score?.fullTime?.home, it?.score?.full_time?.home, it?.fullTime?.home, it?.full_time?.home,
+        it?.homeScore, it?.home_score, it?.scoreHome, it?.goalsHome, it?.home?.score, it?.homeTeam?.score, it?.home_team?.score,
+        it?.team1Score, it?.team_1_score, it?.aScore, it?.a_score
+      ));
+      const b = numVal(firstDefined(
+        it?.score?.b, it?.score?.away, it?.score?.awayScore, it?.score?.away_score, it?.score?.team2, it?.score?.team2Score,
+        it?.score?.fullTime?.away, it?.score?.full_time?.away, it?.fullTime?.away, it?.full_time?.away,
+        it?.awayScore, it?.away_score, it?.scoreAway, it?.goalsAway, it?.away?.score, it?.awayTeam?.score, it?.away_team?.score,
+        it?.team2Score, it?.team_2_score, it?.bScore, it?.b_score
+      ));
+      return (a !== null && b !== null) ? {a,b} : null;
+    }
+    function normalizeWinner(rawWinner, it, match){
+      const w = String(rawWinner || '').trim().toLowerCase();
+      if(!w) return null;
+      if(['a','home','team1','team_1','1','left'].includes(w)) return 'a';
+      if(['b','away','team2','team_2','2','right'].includes(w)) return 'b';
+      const homeName = String(firstDefined(it?.a, it?.home, it?.homeTeam, it?.team1, match?.a, '')).toLowerCase();
+      const awayName = String(firstDefined(it?.b, it?.away, it?.awayTeam, it?.team2, match?.b, '')).toLowerCase();
+      if(homeName && w.includes(homeName)) return 'a';
+      if(awayName && w.includes(awayName)) return 'b';
+      return null;
+    }
+    function collectResultItems(data){
+      if(Array.isArray(data)) return data;
+      return Array.isArray(data?.results) ? data.results
+        : Array.isArray(data?.matches) ? data.matches
+        : Array.isArray(data?.data) ? data.data
+        : Array.isArray(data?.fixtures) ? data.fixtures
+        : [];
+    }
     function applyResultData(data){
-      const items = Array.isArray(data?.results)?data.results:[];
+      const items = collectResultItems(data);
       resultFeed.clear();
       for(const it of items){
-        if(!it||!it.id) continue;
-        resultFeed.set(String(it.id), {
-          id:String(it.id), status:normStatus(it.status),
-          score: validScore(it.score)?{a:+it.score.a,b:+it.score.b}:null,
-          winner: (it.winner==='a'||it.winner==='b')?it.winner:null,
-          source: it.source||null, updatedAt: it.updatedAt||null
+        if(!it) continue;
+        const id = normalizeId(it);
+        if(!id) continue;
+        const match = r32ById[id] || null;
+        const score = extractScore(it);
+        let status = normStatus(firstDefined(it.status, it.matchStatus, it.match_status, it.state, it.phase, it.period, it.statusText, it.status_text));
+        // If trusted feed already has a score and the scheduled match window has passed, treat it as finished.
+        // This fixes APIs that keep status as scheduled/unknown even after full-time data appears.
+        if(score && match){
+          const t = new Date(match.utc).getTime();
+          if(Date.now() >= t + MATCH_WINDOW_MS) status = 'finished';
+        }
+        const winner = normalizeWinner(firstDefined(it.winner, it.winnerSide, it.winner_side, it.winningTeam, it.winning_team), it, match);
+        resultFeed.set(id, {
+          id, status, score, winner,
+          source: it.source || data?.source || null,
+          updatedAt: it.updatedAt || it.updated_at || data?.updatedAt || data?.updated_at || null
         });
       }
-      feedMeta = { loaded:true, updatedAt:data?.updatedAt||new Date().toISOString(), source:data?.source||'worldcup-results.json', error:null };
+      feedMeta = { loaded:true, updatedAt:data?.updatedAt||data?.updated_at||new Date().toISOString(), source:data?.source||'worldcup-results.json', error:null, checkedAt:new Date().toISOString() };
       updateFeedStatus();
+      tick(); // important: instantly redraw fixtures + live roadmap after every successful feed refresh
     }
-    async function loadResultFeed(){
+    async function loadResultFeed(force=false){
+      const cacheKey = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      const url = `${RESULT_FEED_URL}?_=${cacheKey}`;
       try{
-        const r = await fetch(`${RESULT_FEED_URL}?v=${Date.now()}`,{cache:'no-store'});
+        const r = await fetch(url,{
+          cache:'no-store',
+          credentials:'same-origin',
+          headers:{'Cache-Control':'no-cache, no-store, max-age=0','Pragma':'no-cache'}
+        });
         if(!r.ok) throw new Error('HTTP '+r.status);
         applyResultData(await r.json());
-      }catch(e){ feedMeta.error=e?.message||'feed failed'; updateFeedStatus(); }
+        if(force){
+          const btn=document.getElementById('refreshResults');
+          btn?.classList.add('feed-flash');
+          setTimeout(()=>btn?.classList.remove('feed-flash'),900);
+        }
+      }catch(e){
+        feedMeta.error=e?.message||'feed failed';
+        feedMeta.checkedAt=new Date().toISOString();
+        updateFeedStatus();
+      }
     }
     function updateFeedStatus(){
-      const el=document.getElementById('data-source-status'); if(!el) return;
+      const el=document.getElementById('data-source-status');
+      const last=document.getElementById('last-checked');
+      if(last) last.textContent = `শেষ চেক: ${new Date().toLocaleTimeString('bn-BD',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:true})}`;
+      if(!el) return;
       if(feedMeta.error && !feedMeta.loaded){ el.textContent='⚠️ JSON ফিড পাওয়া যায়নি'; el.className='text-amber-200'; return; }
       const fin=[...resultFeed.values()].filter(r=>r.status==='finished'&&r.score).length;
-      el.innerHTML = `✅ ফিড সংযুক্ত • ${bd(fin)} ম্যাচ সম্পন্ন`;
+      const live=[...resultFeed.values()].filter(r=>r.status==='live').length;
+      el.innerHTML = `✅ ফিড সংযুক্ত • ${bd(fin)} ম্যাচ সম্পন্ন${live?` • ${bd(live)} লাইভ`:''}`;
       el.className='text-emerald-200';
     }
 
     // ---------- result + winner logic ----------
     function decideWinner(res){
       if(!res || res.status!=='finished' || !res.score) return null;
-      if(res.score.a>res.score.b) return 'a';
-      if(res.score.b>res.score.a) return 'b';
-      return res.winner; // draw -> needs shootout winner field
+      if(res.score.a > res.score.b) return 'a';
+      if(res.score.b > res.score.a) return 'b';
+      return res.winner; // draw/penalty -> needs winner field from JSON/API
     }
     // resolve any node (M.. / R16.. / QF.. / SF.. / F-1) -> {t1,t2,res,winSide,winName}
     const bracketById = {};
@@ -475,10 +597,15 @@
       b.classList.add('active'); currentFilter=b.dataset.filter; applyFilter();
     });
 
-    // boot
-    loadResultFeed().then(tick);
-    setInterval(tick, 1000*30);
-    setInterval(()=>loadResultFeed().then(tick), RESULT_REFRESH_MS);
+    // boot: redraw immediately, then hard-refresh JSON often so the roadmap advances right after full-time
+    tick();
+    loadResultFeed(true);
+    setInterval(tick, 1000*10);
+    setInterval(()=>loadResultFeed(false), RESULT_REFRESH_MS);
+    document.getElementById('refreshResults')?.addEventListener('click',()=>loadResultFeed(true));
+    document.addEventListener('visibilitychange',()=>{ if(!document.hidden) loadResultFeed(true); });
+    window.addEventListener('focus',()=>loadResultFeed(true));
+    window.addEventListener('online',()=>loadResultFeed(true));
   </script>
 </body>
 </html>
