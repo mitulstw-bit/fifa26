@@ -1,24 +1,121 @@
 {
   "schema": 1,
-  "updatedAt": "2026-06-19T17:05:00Z",
-  "source": "Manual verified Cloudflare Pages JSON feed. Keep this file updated from official FIFA or another trusted provider. Do not enter guessed scores.",
+  "updatedAt": "2026-06-28T18:30:00Z",
+  "stage": "Round of 32",
+  "source": "Manual verified Cloudflare Pages JSON feed. Update only from official FIFA or another trusted provider. For knockout draws, add \"winner\":\"a\"|\"b\" for the shootout result. Never enter guessed scores.",
   "refreshSeconds": 60,
   "results": [
-    { "id": "A01", "status": "finished", "score": { "a": 2, "b": 0 }, "source": "Verified public match report", "updatedAt": "2026-06-11T22:00:00Z" },
-    { "id": "A02", "status": "finished", "score": { "a": 2, "b": 1 }, "source": "Verified public match report", "updatedAt": "2026-06-12T05:00:00Z" },
-    { "id": "B07", "status": "finished", "score": { "a": 1, "b": 1 }, "source": "Verified public match report", "updatedAt": "2026-06-12T22:00:00Z" },
-    { "id": "D19", "status": "finished", "score": { "a": 4, "b": 1 }, "source": "Verified public match report", "updatedAt": "2026-06-13T03:00:00Z" },
-    { "id": "B08", "status": "finished", "score": { "a": 1, "b": 1 }, "source": "Verified public match report", "updatedAt": "2026-06-13T22:00:00Z" },
-    { "id": "E25", "status": "finished", "score": { "a": 7, "b": 1 }, "source": "Verified public match report", "updatedAt": "2026-06-14T20:00:00Z" },
-    { "id": "F31", "status": "finished", "score": { "a": 2, "b": 2 }, "source": "Verified public match report", "updatedAt": "2026-06-14T23:00:00Z" },
-    { "id": "E26", "status": "finished", "score": { "a": 1, "b": 0 }, "source": "Verified public match report", "updatedAt": "2026-06-15T02:00:00Z" },
-    { "id": "F32", "status": "finished", "score": { "a": 5, "b": 1 }, "source": "Verified public match report", "updatedAt": "2026-06-15T05:00:00Z" },
-    { "id": "K61", "status": "finished", "score": { "a": 1, "b": 1 }, "source": "Verified public match report", "updatedAt": "2026-06-17T20:00:00Z" },
-    { "id": "L67", "status": "finished", "score": { "a": 4, "b": 2 }, "source": "Verified public match report", "updatedAt": "2026-06-17T23:00:00Z" },
-    { "id": "L68", "status": "finished", "score": { "a": 1, "b": 0 }, "source": "Verified public match report", "updatedAt": "2026-06-18T02:00:00Z" },
-    { "id": "K62", "status": "finished", "score": { "a": 1, "b": 3 }, "source": "Verified public match report", "updatedAt": "2026-06-18T05:00:00Z" },
-    { "id": "B09", "status": "finished", "score": { "a": 4, "b": 1 }, "source": "Verified public match report", "updatedAt": "2026-06-18T22:00:00Z" },
-    { "id": "B10", "status": "finished", "score": { "a": 6, "b": 0 }, "source": "Verified public match report", "updatedAt": "2026-06-19T01:00:00Z" },
-    { "id": "A04", "status": "finished", "score": { "a": 1, "b": 0 }, "source": "Verified public match report", "updatedAt": "2026-06-19T04:00:00Z" }
+    {
+      "id": "M73",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M76",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M74",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M75",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M78",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M77",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M79",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M80",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M82",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M81",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M84",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M83",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M85",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M88",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M86",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    },
+    {
+      "id": "M87",
+      "status": "scheduled",
+      "score": null,
+      "source": "Awaiting kickoff",
+      "updatedAt": "2026-06-28T18:30:00Z"
+    }
   ]
 }
